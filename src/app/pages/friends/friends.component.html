@@ -1,0 +1,64 @@
+<div class="friends_p"> 
+    <app-header></app-header>     
+    <div class="Grid">
+        <div class="friends_inc">
+            <div class="friends_search">            
+                <input placeholder="Search Friends.." type="text" class="srch" (keyup)="searchfriends($event)">                   
+
+                <div class="suggestion_parent" *ngIf="suggestions"> 
+                    <div *ngIf="listusers.length > 0">
+                        <div class="sugg" *ngFor="let user of listusers" (click)="selectuser(user._id)">{{user.name | titlecase}}</div>
+                    </div>                    
+                    <div *ngIf="(listusers | json) === '{}'">
+                        <div class="sugg">No user found</div>                     
+                    </div>            
+                </div> 
+            </div>  <!-- friends_search --> 
+        
+            <div class="friends_list">
+                <h4>Friends</h4>
+            
+                <div *ngIf="listfriends.length > 0">
+                    <div class="friends_list_div" *ngFor="let friend of listfriends" (click)="selectuser(friend._id)">
+                        <div *ngIf="friend.profile_pic; else default; ">
+                            <img src="{{backend_url}}profile_pics/{{friend.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                        </div>
+                                
+                        <ng-template #default>
+                            <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                        </ng-template>
+                        <span>
+                            {{friend.name | titlecase}}
+                            <h5>{{friend.country}}</h5>
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div *ngIf="listfriends.length === 0">
+                    <div class="">You have no friends yet.</div>
+                </div> 
+            
+            </div><!-- friends_list -->  
+        
+            <div class="friends_list suggestions">
+                <h4>Suggestions</h4>         
+                <div class="friends_list_div" *ngFor="let friend of suggested_friends">
+                    <div *ngIf="friend.profile_pic; else default;">
+                        <img (click)="selectuser(friend._id)" src="{{backend_url}}profile_pics/{{friend.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                    </div>         
+                    <ng-template #default>
+                        <img (click)="selectuser(friend._id)" src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                    </ng-template>
+                    <span>
+                        <div (click)="selectuser(friend._id)">{{friend.name | titlecase}}</div>
+                        <button class="btn" (click)="addfriend(friend._id, $event)">Add friend</button>                         
+
+                    </span>
+                    <div class="clearfix"></div>
+                </div>   
+            </div><!-- friends_list -->  
+               
+        </div> <!-- friends_inc -->         
+    </div><!--Grid -->
+</div>

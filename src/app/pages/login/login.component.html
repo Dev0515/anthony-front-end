@@ -1,0 +1,141 @@
+<div class="anim_b">
+<div class="anim"> 
+    <div class="content">
+      <div id="form-bloc" align="left" >
+        <a href="javascript:void(0)" style="position:absolute; right:-40px; top:20px" class="button" (click)="changeForm()">
+          <img [src]="signinImg" style="width:80px; height:auto"   />
+        </a>  
+        <h1 align="center">
+          <img [src]="logoImg" style="width:100px; height:auto" /><br>Login
+        </h1>  
+        <form [formGroup]="loginForm"> 
+            <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+          <div class="frm">
+            <input type="text" formControlName="email"  placeholder="Email" required />
+      
+          <div class="err" *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+            <div class="error_message" *ngIf="loginForm.controls.email.errors.required">
+              Email is required.
+            </div>
+            <div class="error_message" *ngIf="loginForm.controls.email.errors.pattern">
+              Please enter the correct email.
+            </div>
+          </div>
+        </div><!--frm-->
+
+        <div class="frm">
+          <input type="password" formControlName="password"  placeholder="Password" required />
+        
+          <div class="err" *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+            <div class="error_message" *ngIf="loginForm.controls.password.errors">Password is required.</div>
+          </div>
+  
+          <div align="center" class="dis">
+            <button [disabled]="loginForm.invalid" class="button"  (click)="login()">GO</button><br>
+            <p [routerLink]="['/forgotpassword']" class="forgot">Forgot your password?</p>
+          </div>
+        
+          </div>
+        </form>  
+      </div>
+  
+      <div id="form-bloc2" align="left" > 
+        <h1 align="center" >Sign Up!</h1> 
+        <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+        <form [formGroup]="signupForm1">
+          <div id="step1">
+          <div class="frm">
+            <input type="text" class="text" formControlName="name" maxlength="30" placeholder="Name" required />
+            <div class="errr" *ngIf="signupForm1.controls.name.invalid && (signupForm1.controls.name.dirty || signupForm1.controls.name.touched)">
+              <div class="error_message" *ngIf="signupForm1.controls.name.errors">Name is required.</div>
+            </div>
+          </div>
+
+          <div class="frm">
+            <input type="email" [email]="true" class="text" maxlength="30" formControlName="email" placeholder="Email" required /> 
+            <div class="errr" *ngIf="signupForm1.controls.email.invalid && (signupForm1.controls.email.dirty || signupForm1.controls.email.touched)">
+              <div class="error_message" *ngIf="signupForm1.controls.email.errors.required">Email is required.</div>
+              <div class="error_message" *ngIf="signupForm1.controls.email.errors.pattern">Please enter the correct email.</div>
+            </div>
+            <div class="error_message errr" *ngIf="already_exists">
+              Email already exists.
+            </div>
+          </div> 
+
+          <div class="frm"> 
+            <input type="password" class="text" minlength="8" maxlength="30" formControlName="password" placeholder="Password" required /> 
+            <div class="errr" *ngIf="signupForm1.controls.password.invalid && (signupForm1.controls.password.dirty || signupForm1.controls.password.touched)">
+              <div class="error_message" *ngIf="signupForm1.controls.password.errors.required">Password is required.</div>
+              <div class="error_message" *ngIf="signupForm1.controls.password.errors.minlength">Password must be 8 characters long.</div>
+            </div>            
+          </div>
+
+          <div class="frm"> 
+            <input type="password" class="text" maxlength="30" formControlName="repeat_password" placeholder="Repeat password" required />
+            <div class="errr" *ngIf="signupForm1.controls.repeat_password.invalid && (signupForm1.controls.repeat_password.dirty || signupForm1.controls.repeat_password.touched)">
+              <div class="error_message" *ngIf="signupForm1.controls.repeat_password.errors.required">Repeat password is required.</div>                                      
+            </div>
+          
+         
+            <div class="error_message errr" *ngIf="pass_matched">Password and repeat password not matched.</div>            
+          </div>
+            
+  
+            <p align="center" class="dis1">
+              <button class="button" [disabled]="signupForm1.invalid" (click)="signup1()" style="border:2px solid #FC6" >NEXT</button>
+            </p>
+          </div>
+        </form>
+  
+        <form [formGroup]="signupForm2">
+          <div id="step2">
+
+           <div class="frm">
+            <input type="text" class="text" maxlength="30" formControlName="username" placeholder="Enter a username"  required >
+            <div class="errrr" *ngIf="signupForm2.controls.username.invalid && (signupForm2.controls.username.dirty || signupForm2.controls.username.touched)">
+              <div class="error_message" *ngIf="signupForm2.controls.username.errors.required">Username is required.</div>
+              <div class="error_message" *ngIf="signupForm2.controls.username.errors.pattern">Accept letters, numbers and underscore (minimum length = 5 characters).</div>
+            </div>
+           </div>
+            
+           <div class="frm">
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob" required>
+           <span class="d_picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+           </span> 
+            
+            <div class="errr" *ngIf="signupForm2.controls.dob.invalid && (signupForm2.controls.dob.dirty || signupForm2.controls.dob.touched)">
+              <div class="error_message" *ngIf="signupForm2.controls.dob.errors.required">Date of birth is required.</div>              
+            </div>
+          </div> 
+
+          <div class="frm">
+            <input type="text" class="text" maxlength="12" formControlName="phone_no"  placeholder="Phone number"  required >   
+            <div class="errr" *ngIf="signupForm2.controls.phone_no.invalid && (signupForm2.controls.phone_no.dirty || signupForm2.controls.phone_no.touched)">
+              <div class="error_message" *ngIf="signupForm2.controls.phone_no.errors.required">Phone number is required.</div>              
+              <div class="error_message" *ngIf="signupForm2.controls.phone_no.errors.pattern">Accept numbers only.</div>
+            </div>
+          </div>  
+          
+          <div class="frm">
+            <select class="text" formControlName="country" required>              
+              <option>Select Country</option>
+              <option *ngFor="let country of countries">{{country}}</option>
+            </select>
+            <div class="errr" *ngIf="signupForm2.controls.country.invalid && (signupForm2.controls.country.dirty || signupForm2.controls.country.touched)">
+                <div class="error_message" *ngIf="signupForm2.controls.country.errors.required">Country is required.</div>                              
+              </div>
+          </div>
+            <p align="center" class="dis">
+              <a (click)="BacktoSignup1()" href="javascript:void(0)"  style=" border:0; padding:5px">&larr;</a><br>
+              <button class="button" [disabled]="signupForm2.invalid" style="border:2px solid #FC6" (click)="signup2()">GO</button>
+            </p>
+          </div>
+        </form>  
+          <a id="cancel" class="button" (click)="Backtologin()" href="javascript:void(0)" style="position:absolute; right:-20px; top:20px; background-color:#000">x</a>           
+      </div>
+    
+    </div>
+  </div>
+</div>

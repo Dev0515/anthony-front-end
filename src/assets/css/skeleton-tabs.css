@@ -1,0 +1,197 @@
+ul.tab-nav {
+    list-style: none;
+    border-bottom: 1px solid #bbb;
+    padding-left: 5px;
+}
+
+ul.tab-nav li {
+    display: inline;
+}
+
+ul.tab-nav li a.button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -1px;
+    border-bottom: none;
+}
+
+ul.tab-nav li a.active.button {
+    border-bottom: 1px solid #fff;
+}
+
+.tab-content .tab-pane {
+    display: none;
+}
+
+.tab-content .tab-pane.active {
+    display: block;
+}
+
+/** 15-2-2018 **/
+
+.skltbs-tab-item {
+    margin: 0 0px 3px 0;
+}
+
+.skltbs-tab-item .skltbs-tab {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    padding: 1em 8px;
+    color: #ccc;
+}
+
+.skltbs-tab.active {
+    background: #f7e041;
+    color: #000;
+}
+
+.skltbs-tab {
+    color: #CCC;
+}
+
+.skltbs-tab.active:hover {
+    color: #000;
+}
+
+.skltbs {
+    margin-top: 2.5em;
+    margin-bottom: 1.5em;
+}
+
+.skltbs-tab.active.active.button {
+    border-bottom: 0px none;
+}
+
+.skltbs ul.tab-nav{
+    border-bottom: 0px none;
+    padding-left: 8px;
+    margin-bottom: 27px;
+}
+
+.skltbs hr {
+    clear: both;
+    height: 1px;
+    background: #333;
+    border: medium;
+    width: 100%;
+}
+
+.hding h2{
+    color: #999;
+}
+
+/** 16-2-2018 **/
+.p_name {
+    color: #fff;
+}
+
+.p_name h5{
+   margin-bottom: 0px;
+   margin-top: 10px;
+}
+
+.p_name h5 span {
+    width: 64px;
+    display: inline-block;
+}
+
+.profile_p {
+    position: relative;
+}
+
+.profile_b {
+    position: relative;
+    top: -30px;
+}
+
+.profile_b form {
+    opacity: 0;
+    z-index: -1;
+}
+
+/* .profile_b span {
+	color: #000;
+	padding: 1px 3px;
+	border-radius: 2px 2px 50% 50%;
+	font-size: 12px;
+	width: auto;
+	position: absolute;
+	text-align: left;
+	left: 64px;
+	top: 3px;
+	background-color: #f3f3f3;
+} */
+
+.profile_b span {
+	color: #000;
+	padding: 0px 6px;
+	border-radius: 2px 2px 2px 2px;
+	font-size: 12px;
+	width: auto;
+	position: absolute;
+	text-align: left;
+	left: 61px;
+	top: 6px;
+    background-color: #d3d3d3;
+  
+}
+
+.profile_p #profile_image {
+    border-radius: 50%;
+}
+
+.pro_last{
+    padding-right: 15px;
+}
+
+.numb {
+    padding-left: 15px;
+    color: #999;
+}
+
+.p_name h5:first-child {
+    margin-top: 0;
+}
+
+.profile_b span:hover {
+    background-color: #fff !important;
+}
+
+.statu h2 {
+    color: #999;
+}
+
+.statu .aside p {
+    color: #999;
+}
+
+.statu .side {
+    color: #999;
+}
+
+.discussion h2{
+    color: #999;
+}
+
+.discussion p{
+    color: #999;
+}
+
+.discussion .side{
+    border-right: 1px solid #2E2E2E;
+}
+
+.alerte h2{
+    color: #999;
+}
+
+.alerte p{
+    color: #999;
+}
+
+.alerte .equal-col{
+    color: #999;
+}
+
+.profile_b form input {
+    width: 51px;
+}

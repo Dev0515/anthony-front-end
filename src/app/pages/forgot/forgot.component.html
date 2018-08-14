@@ -1,0 +1,72 @@
+<div class="anim_b"> 
+<div class="anim"> 
+  <div class="content">
+
+    <div class="form-bloc" align="left" *ngIf="firstform">     
+      <h1 align="center">
+        <img [src]="logoImg" style="width:100px; height:auto" /><br>Forgot Password
+      </h1>  
+      <form [formGroup]="forgotForm"> 
+          <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>
+        <div class="frm">
+        <input type="text" formControlName="email"  placeholder="Enter your email" required />
+        <div class="err" *ngIf="forgotForm.controls.email.invalid && (forgotForm.controls.email.dirty || forgotForm.controls.email.touched)">
+          <div class="error_message" *ngIf="forgotForm.controls.email.errors.required">
+            Email is required.
+          </div>
+          <div class="error_message" *ngIf="forgotForm.controls.email.errors.pattern">
+            Please enter the correct email.
+          </div>
+        </div>
+      </div>
+
+
+        <div class="dis" align="center">
+          <button type="button" [disabled]="forgotForm.invalid" class="button" (click)="forgot()">NEXT</button><br>
+          <p [routerLink]="['/login']" class="forgot">Login</p>
+        </div>
+      </form>  
+    </div>
+
+    <div class="form-bloc" align="left" *ngIf="secondform">     
+        <h1 align="center">
+          <img [src]="logoImg" style="width:100px; height:auto" /><br>Reset Password
+        </h1>  
+        <form [formGroup]="resetForm">   
+            <jaspero-alerts [defaultSettings]="options"></jaspero-alerts>         
+          <div class="frm">
+          <input type="password" formControlName="password"  placeholder="New Password" required />                              
+          <div class="err" *ngIf="resetForm.controls.password.invalid && (resetForm.controls.password.dirty || resetForm.controls.password.touched)">
+            <div class="error_message" *ngIf="resetForm.controls.password.errors.required">
+                Password is required.
+            </div>
+            <div class="error_message" *ngIf="resetForm.controls.password.errors.minlength">
+              Password must be 8 characters long.
+            </div>
+          </div>
+          </div>
+
+          <div class="frm">
+          <input type="password" formControlName="confirm_password"  placeholder="Confirm Password" required />                              
+          <div class="err" *ngIf="resetForm.controls.confirm_password.invalid && (resetForm.controls.confirm_password.dirty || resetForm.controls.confirm_password.touched)">
+            <div class="error_message" *ngIf="resetForm.controls.confirm_password.errors.required">
+                Confirm password is required.
+            </div>
+          </div>
+        </div>
+
+          <div class="error_message" *ngIf="pass_matched">
+            New password and confirm password not matched.
+          </div>            
+
+          <div class="dis" align="center">
+              <a (click)="BacktoForgot()" href="javascript:void(0)"  style="border:0; padding:5px">&larr;</a><br>
+            <button type="button" [disabled]="resetForm.invalid" class="button" (click)="reset()">GO</button><br>
+            <p [routerLink]="['/login']" class="forgot">Login</p>
+          </div>
+        </form>  
+      </div>
+    
+  </div>
+</div>
+</div>  

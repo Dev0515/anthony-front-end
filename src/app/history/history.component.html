@@ -1,0 +1,37 @@
+<div class="edit_profile_page">
+  <div class="edit_profile">
+  <app-header></app-header>
+  <h1 align="center" >User History</h1> 
+  <h4 align="center" class="save-post">User Save Post</h4>
+
+      <div class="row">
+      <div  class="frm" *ngFor="let post of posts" class="mb-50">
+         
+        
+              <div *ngFor="let historydata of post" class="col-sm-4">
+                  <div *ngIf="historydata.type == 'image'">
+                  <img src="{{backend_url}}uploads/{{historydata.post}}" width="100x" height="100x">
+                   <p class="namemediafile">{{historydata.post}}</p>
+                  </div>
+              
+                  <div *ngIf="historydata.type == 'video'">
+                    <video controls src="{{backend_url}}uploads/{{savepost.post}}" width="100x" height="100x"> </video>
+                    <p class="namemediafile">{{historydata.post}}</p>
+                  </div> 
+                </div>
+                  
+                  
+
+     
+         
+        <div class="clearfix"></div>        
+        </div>
+
+          
+          
+          <br> 
+      </div>
+    
+  
+  </div> <!-- edit_profile -->
+  </div> <!-- edit_profile_page -->

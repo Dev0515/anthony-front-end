@@ -1,0 +1,31 @@
+<div class="edit_profile_page">
+  <div class="edit_profile">
+    <app-header></app-header>
+    <h1 align="center" >Edit Media</h1> 
+    <form [formGroup]="editForm">
+      <div  class="frm" *ngFor="let post of posts" class="mb-50">
+      {{post.id}}
+        <div *ngFor="let mediaFile of post">
+          <div *ngIf="mediaFile.type == 'image'">
+          <img src="{{backend_url}}uploads/{{mediaFile.post}}" width="100x" height="100x">
+            <p> {{mediaFile.post}} </p>
+          </div>
+          <div *ngIf="mediaFile.type == 'video'">
+            <video controls src="{{backend_url}}uploads/{{mediaFile.post}}" width="100x" height="100x"> </video>
+            <p> {{mediaFile.post}} </p>
+          </div> 
+          <div class="p_browse_file">
+           <div class="custm_inp">Browse...</div>
+           
+              <input id="file" multiple (change)="editMediaItems(post.id,mediaFile.itemId,mediaFile.post,$event, i)" type="file">
+
+
+              <button (click)="deletemediapost(post.id,mediaFile.itemId,mediaFile.post,$event, i)" class="f_btn">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+        </div> <br> 
+      </div>
+    </form>
+  </div> <!-- edit_profile -->
+</div> <!-- edit_profile_page -->

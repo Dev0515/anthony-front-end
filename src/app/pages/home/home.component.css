@@ -1,0 +1,138 @@
+/* CSS Document */
+
+
+/* body  { 
+  background-color: #000; 
+  margin:0 auto; 
+  color:#999; 
+  font-family: Helvetica, sans-serif; 
+  height:auto
+} */
+
+.homepage {
+    background-color: #454;
+    min-height: 1000px;
+}
+
+#slider {
+    /* padding-left: 350px; */
+    margin-top: 150px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #999
+}
+
+a:hover {
+    text-decoration: none;
+    color: #FC6;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+a img {
+    border: none
+}
+
+hr {
+    clear: both;
+    height: 1px;
+    background: #333;
+    border: medium;
+    width: 100%;
+}
+
+section.module:last-child {
+    margin-bottom: 0;
+}
+
+section.module.parallax {
+    height: 600px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+section.module.parallax-1 {
+    background-image: url("/assets/images/s1.jpg");
+}
+
+section.module.parallax-2 {
+    background-image: url("/assets/images/s2.jpg");
+}
+
+/** 9-4-2018 **/
+
+#slider {
+    height: 500px;
+    overflow-y: scroll;
+    margin-bottom: 50px;
+}
+
+/** 16-4-2018 **/
+
+.vdo_img{
+    width: 100%;
+}
+
+.pos_rel {
+    position: relative;
+}
+
+button.leftRs {
+    position: absolute;
+    top: 35%;
+    left: 39%;
+    background-color: transparent;
+    color: #fff;
+    border: 0px none;
+    font-size: 22px;
+}
+
+button.rightRs {
+    position: absolute;
+    top: 35%;
+    right: 39%;
+    background-color: transparent;
+    color: #fff;
+    border: 0px none;
+    font-size: 22px;
+}
+
+.mb-50 {
+    margin-bottom: 50px;
+}
+
+.ngxcarouselPointDefault[_ngcontent-c3] .ngxcarouselPoint[_ngcontent-c3] li[_ngcontent-c3]{
+    background: transparent;
+}
+
+.ngxcarouselPointDefault[_ngcontent-c3] .ngxcarouselPoint[_ngcontent-c3] li.active[_ngcontent-c3]{
+    background: transparent;
+}
+
+
+.f_btn {
+    background-color: transparent;
+    padding: 3px 15px;
+    border-radius: 3px;
+    color: #fff;
+    border: 1px solid #f3f3f3;
+    margin: 2px;
+    width: 120px;
+}
+
+.f_btn span {
+    display: block;
+    font-weight: 600;
+    color: #f7e041;
+}

@@ -1,0 +1,28 @@
+<div class="edit_profile_page">
+    <div class="edit_profile">
+    <app-header></app-header>
+    <h1 align="center" >My Comments</h1> 
+ 
+        <div class="row">
+        <div  class="frm" *ngFor="let post of posts" class="mb-50">
+          <div *ngFor="let mycomment of post" class="mycommentdiv">
+            <div *ngIf="mycomment.type == 'image'">
+            <img src="{{backend_url}}uploads/{{mycomment.post}}" width="100x" height="100x">
+              <p> {{mycomment.post}} </p>
+              
+              {{post.comment_data}}
+            </div>
+            <div *ngIf="mycomment.type == 'video'">
+              <video controls src="{{backend_url}}uploads/{{mycomment.post}}" width="100x" height="100x"> </video>
+              <p> {{mycomment.post}} </p>
+            </div> 
+            </div> <br> 
+  
+            <div class="clearfix"></div> 
+        </div>
+      </div>
+     
+             
+    
+    </div> <!-- edit_profile -->
+    </div> <!-- edit_profile_page -->

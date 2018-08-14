@@ -1,0 +1,51 @@
+<div class="edit_profile_page">
+    <div class="edit_profile">
+    <app-header></app-header>
+    <h1 align="center" >Edit Profile</h1> 
+    
+    <form [formGroup]="editForm" >
+      <div class="frm">
+        <input type="text" class="text inp_field" formControlName="name"  maxlength="30" required />
+      </div>
+    <br>
+    
+      <div class="frm">
+        <input type="text" class="text inp_field" maxlength="30" formControlName="username" placeholder="Enter a username"  required />
+      </div>
+        <br>
+    <div class="frm">
+      <input type="email" [email]="true" class="text inp_field" maxlength="30" formControlName="email"  required /> 
+    </div> 
+    <br>
+    <div class="frm date_b">
+      <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob" class="inp_field" required />
+     <span class="d_picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+     </span> 
+      
+      <div class="errr" *ngIf="editForm.controls.dob.invalid && (editForm.controls.dob.dirty || editForm.controls.dob.touched)">
+        <div class="error_message" *ngIf="editForm.controls.dob.errors.required">Date of birth is required.</div>        
+      </div> 
+    </div>  
+    <br>
+    <div class="frm">
+      <select class="text" class="inp_field" formControlName="country" required>              
+        <option>Select Country</option>
+        <option *ngFor="let country of countries">{{country}}</option>
+      </select>
+    </div>
+    <br>
+    <div class="frm">
+      <input type="text" class="text inp_field" maxlength="12" formControlName="phone_no"  placeholder="Phone number"  required >   
+    </div> 
+    <br>
+    <input type="hidden" formControlName="user_id">
+    <div class="frm">
+      <button class="button inp_field submit_btn" [disabled]="editForm.invalid" style="border:2px solid #FC6; float:left;" (click)="editprofile()">submit</button>
+     </div> 
+    <br><br>
+    </form>             
+    
+    </div> <!-- edit_profile -->
+    </div> <!-- edit_profile_page -->

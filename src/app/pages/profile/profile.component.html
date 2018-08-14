@@ -1,0 +1,82 @@
+<div class="profile_p">
+	<app-header></app-header>
+	<div class="profile_inc">
+
+		<div class="p_img">
+			<div *ngIf="profile.profile_pic; else default; ">
+				<img src="{{backend_url}}profile_pics/{{profile.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+			</div>
+			<ng-template #default>
+				<img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+			</ng-template>
+		</div>
+		<!-- p_img -->
+
+		<div class="p_data">
+			<h3>{{profile.name}}
+				<h5>
+					<img src="assets/images/country.png">
+					<span>{{profile.country}}</span>
+				</h5>
+			</h3>
+			<h4>Following
+				<span>{{followlist}}</span>
+			</h4>
+
+			<div *ngIf="showfollow">
+				<button class="btn follow" id="follow" (click)="follow()">Follow</button>
+			</div>
+			
+			<div *ngIf="showunfollow">
+				<button class="btn follow" id="unfollow" (click)="unfollow()">Unfollow</button>
+			</div>
+
+			<div *ngIf="(friendrequest | json) === '{}'">
+				<button class="friend_reqs" (click)="sendrequest()">Add Friend</button>
+			</div>
+			<div *ngIf="(friendrequest | json) != '{}'">
+				<div *ngIf="(friendrequest.sender_id === user_id && friendrequest.status === 'pending') || (request_sent === true)">
+					<button class="friend_reqs">Friend Request Sent</button>
+				</div>
+				<div *ngIf="(friendrequest.sender_id !== user_id && friendrequest.status === 'pending')">
+					<button class="friend_reqs confirm_btn" (click)="response_req('accepted')">Confirm</button>
+					<button class="friend_reqs reject_btn" (click)="response_req('rejected')">Reject</button>
+				</div>
+				<div *ngIf="(friendrequest.status === 'accepted') || (request_accepted === true)">
+					<button class="friend_reqs" (click)="unfriend()">Unfriend</button>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+
+		</div>
+		<!-- p_data -->
+
+		<div class="clearfix"></div>
+
+		<div class="p_infor">
+			<h6>Information</h6>
+
+			<div class="p_info">Phone No :
+				<span>{{profile.phone_no}}</span>
+			</div>
+			<div class="p_info">Date of Birth :
+				<span>{{profile.dob}}</span>
+			</div>
+		</div>
+		<div class="p_media">
+			<h6>Media</h6>
+			<div *ngFor="let media of medias">
+				<div *ngIf="media.type == video">
+					<video id="video" controls width="120" height="90" src="{{backend_url}}uploads/{{media}}"></video>
+				</div>
+				<div *ngIf="media.type == image">
+					<img width="120" height="90" src="{{backend_url}}uploads/{{media}}">
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!--profile_inc-->
+</div>
+<!--profile_p-->

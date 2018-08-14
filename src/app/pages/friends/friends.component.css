@@ -1,0 +1,119 @@
+.sugg, .friends{
+    cursor: pointer;
+}
+
+.friends_p{
+    background-color: #000;
+    min-height: 1000px;
+}
+
+.friends_inc {
+    padding: 145px 50px 0;
+}
+
+.friends_search input {
+    max-width: 300px;
+    width: 100%;
+    height: 35px;
+    padding: 0 15px;
+    margin-left: 10%;
+}
+
+.friends_inc .friends_list {
+    color: #fff;
+    max-width: 320px;
+    float: left;
+    width: 100%;
+    margin-right: 100px;
+    border-right: 1px solid #f3f3f3;
+    margin-top: 70px;
+}
+
+.friends_inc .friends_list.suggestions {
+    border-right: 0px none;
+}
+
+
+.friends_inc .friends_list h4 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+.friends_inc .friends_list .friends_list_div {
+    margin-bottom: 50px;
+}
+
+.friends_inc .friends_list .friends_list_div img {
+    width: 80px;
+    height: 80px;
+    float: left;
+    border-radius: 50%;
+}
+
+.friends_inc .friends_list .friends_list_div span {
+    float: left;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.clearfix{
+    clear: both;
+}
+
+.friends_inc .friends_list .friends_list_div span {
+    float: left;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.friends_inc .friends_list .friends_list_div span h5 {
+    margin-top: 10px;
+    font-weight: 500;
+    color: #909090;
+}
+
+/* .friends_inc .friends_list.suggestions .friends_list_div span {
+    margin-top: 30px;
+} */
+
+.friends_inc .friends_list.suggestions .friends_list_div .btn {
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 0px;
+    margin-top: 15px;
+    background-color: #FC6;
+    display: block;
+}
+
+.friends_list_div, .btn{
+    cursor: pointer; 
+}
+/** 20-2-2018 **/
+
+.suggestion_parent {
+    background-color: #fff;
+    max-width: 334px;
+    width: 100%;
+    height: 35px;
+    margin-left: 10%;
+    z-index: 9;
+    position: absolute;
+}
+
+.sugg {
+    padding: 8px 15px 7px;
+    background-color: #fff;
+}
+
+.sugg:hover {
+    background-color: #202020;
+}
+
+.sugg:hover {
+    background-color: #ccc;
+}
+
+.friends_search {
+    position: relative;
+}
