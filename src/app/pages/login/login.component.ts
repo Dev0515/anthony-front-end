@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.userService.login(this.loginForm.value).subscribe(           // Successful responses call the first callback.
-
       data => {
         let token = data.token;
         let user_id = data.user._id;
@@ -83,8 +82,6 @@ export class LoginComponent implements OnInit {
         this._alert.create(type, message);
       }
     );
-
-
   }
 
   checkAgreement(ischecked) {
@@ -124,14 +121,25 @@ export class LoginComponent implements OnInit {
   }
 
   signup2(){
+    debugger;
     if(this.isCheckedTerms)
     {
+      debugger;
       this.showTermsMessage = false;
       this.signupForm2.value.dob = moment(this.signupForm2.value.dob).format('DD-MM-YYYY');
       Object.assign(this.RegisterData, this.signupForm2.value);
       this.userService.register(this.RegisterData).subscribe((response) => {
       console.log('Final res', response);
       this._alert.create('success', 'Successfully register');
+      if(response.success && response.message== "Register successfully.")
+      {
+        debugger;
+        this.loginForm.patchValue({"email" : this.signupForm1.value.email});
+        this.loginForm.patchValue({"password" : this.signupForm1.value.password});
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+          this.login();
+      }, 1000);
+      }
     });
   }
   else

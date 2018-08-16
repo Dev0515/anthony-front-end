@@ -288,6 +288,7 @@ display: inline-block;
 width: 100%;
 margin-top: 16px;
 }
+
 .frm-login input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 color: #5d5c5c;
 }
@@ -319,6 +320,21 @@ top:5px;
 }
 .copyright p {
   text-align: center;
-  color: #fff;
+  color: #000000;
   font-size: 14px;
+}
+
+.terms {
+  border: none !important;
+  font-size: 13px !important;
+  display: initial !important;
+  padding: 15px 0 !important;
+}
+.terms-check label {
+  width: auto;
+  padding-left: 30px;
+}
+.terms-check input[type="checkbox"] {
+  margin-left: -25px;
+  margin-top: 2px;
 }

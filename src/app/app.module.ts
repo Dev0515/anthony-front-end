@@ -26,6 +26,7 @@ import { ShopComponent } from './shop/shop.component';
 import { HistoryComponent } from './history/history.component';
 import { SavedpostComponent } from './savedpost/savedpost.component';
 import { MycommentsComponent } from './mycomments/mycomments.component';
+import { TermsConditionComponent } from './pages/terms-condition/terms-condition.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { MycommentsComponent } from './mycomments/mycomments.component';
     HistoryComponent,
     SavedpostComponent,
     MycommentsComponent,
+    TermsConditionComponent,
   ],
   imports: [
     BrowserModule,

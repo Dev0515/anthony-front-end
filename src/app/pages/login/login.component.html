@@ -124,7 +124,7 @@
                 <option *ngFor="let country of countries">{{country}}</option>
               </select>
               <div class="terms-check">
-                <label><input    (change)="checkAgreement($event.target.checked)" type="checkbox" value="" name="">I Agree to the Terms and Condition</label>
+                <label><input (change)="checkAgreement($event.target.checked)" type="checkbox" value="" name="">I Agree to the <a class="terms" target="_blank" [routerLink]="['/terms']">Terms and Condition</a></label>
                 <div class="errr error-terms" *ngIf="!isCheckedTerms">
                     <div class="error_message" *ngIf="showTermsMessage">Please accept the Terms & Conditions</div>
                   </div>

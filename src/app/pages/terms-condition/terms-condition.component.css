@@ -1,0 +1,71 @@
+.terms-conditions {
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  max-width: 1170px;
+  width: 70%;
+  margin: 0 auto;
+  border: 2px solid #F9EB55;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  height: 550px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.anim_b{
+  background-color:#020202;  
+  font-family:  Helvetica, sans-serif;  
+  margin:0 auto ; 
+  background-image:url('/assets/images/background.jpg');
+  background-repeat:no-repeat;
+  background-size:90%; 
+  background-position:center top;
+  margin: -.6%;
+}
+.anim {
+  width: 100wh;
+  height: 100vh;
+  padding-top:3% ;        
+  background: linear-gradient(-45deg, rgba(249, 235, 85, 0.7),rgba(0, 0, 0, 0.3),rgba(249, 235, 85, 0.7));
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;  
+}
+.terms-conditions h3 {
+  font-weight: normal;
+  font-size: 24px;
+  color: #333;
+}
+.terms-conditions p {
+  font-size: 14px;
+  line-height: 23px;
+  color: #565656;
+}
+.terms-conditions h6 {
+  font-weight: normal;
+  font-size: 20px;
+  color: #333;
+  margin: 22px 0;
+}
+.terms-conditions ul {
+  display: block;
+  margin: 0;
+  padding: 0 0 0 20px;
+  list-style: none;
+}
+.terms-conditions ul li {
+  font-weight: normal;
+  font-size: 14px;
+  color: #333;
+  list-style: decimal;
+  margin-bottom: 20px;
+  line-height: 22px;
+ }
+ .terms-conditions ul li ul {
+   list-style: none;
+   padding-left: 35px;
+   margin-top: 20px;
+ }
+ .terms-conditions ul li ul li {
+  list-style: lower-alpha;
+}
