@@ -304,3 +304,21 @@ color: #5d5c5c;
 position: relative !important;
 top:5px;
 }
+.copyright {
+  width:100%;
+  text-align: center;
+  position:fixed;
+  bottom:0;
+
+}
+.copyright .container {
+  width:100%;
+  max-width:100%;
+  padding:0 20px;
+  box-sizing: border-box;
+}
+.copyright p {
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+}
