@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthguardService } from '../services/authguard.service';
+import {NoAuthguardService} from '../services/noauthguard.service'
 import { LoginComponent } from '../pages/login/login.component';
 import { ForgotComponent } from '../pages/forgot/forgot.component';
 import { HomeComponent } from '../pages/home/home.component';
@@ -17,11 +18,13 @@ import { ResetPasswordComponent } from '../pages/reset-password/reset-password.c
 const appRoutes: Routes = [
   { 
     path: 'login', 
-    component: LoginComponent 
+    component: LoginComponent,
+    canActivate: [NoAuthguardService],
   },
   {
     path: 'terms',
-    component: TermsConditionComponent
+    component: TermsConditionComponent,
+    canActivate: [NoAuthguardService],
   },
   { 
     path: 'shop', 
@@ -30,7 +33,8 @@ const appRoutes: Routes = [
 
   { 
     path: 'forgotpassword', 
-    component: ForgotComponent 
+    component: ForgotComponent,
+    canActivate: [NoAuthguardService],
   },
   {
     path: 'resetpassword/:id',

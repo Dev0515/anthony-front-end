@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserService } from './services/user.service';
 import { GlobalService } from './services/global.service';
 import { AuthguardService } from './services/authguard.service';
+import {NoAuthguardService} from './services/noauthguard.service';
 import { ForgotComponent } from './pages/forgot/forgot.component';
 import { JasperoAlertsModule } from '@jaspero/ng2-alerts';
 import { HomeComponent } from './pages/home/home.component';
@@ -60,7 +61,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     JasperoAlertsModule,
     NgxCarouselModule
   ],
-  providers: [UserService, GlobalService, AuthguardService,ChatService],
+  providers: [UserService, GlobalService, AuthguardService,NoAuthguardService,ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
