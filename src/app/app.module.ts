@@ -27,6 +27,7 @@ import { HistoryComponent } from './history/history.component';
 import { SavedpostComponent } from './savedpost/savedpost.component';
 import { MycommentsComponent } from './mycomments/mycomments.component';
 import { TermsConditionComponent } from './pages/terms-condition/terms-condition.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { TermsConditionComponent } from './pages/terms-condition/terms-condition
     SavedpostComponent,
     MycommentsComponent,
     TermsConditionComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

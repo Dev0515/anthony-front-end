@@ -29,19 +29,12 @@ export class ForgotComponent implements OnInit {
       email: new FormControl('', [ Validators.required,  Validators.pattern(this.emailPattern)]),
     });
 
-    this.resetForm = new FormGroup ({
-      password: new FormControl('', [ Validators.required, Validators.minLength(8)]),
-      confirm_password: new FormControl('', [ Validators.required])
-    });
   }
 
   forgot(){
-    
     this.userService.forgot_password(this.forgotForm.value).subscribe(
-
       data => {
-        this.firstform = false;
-        this.secondform = true;
+        this._alert.create('success', 'Reset password link has been sent your email');
         this.userId = data.user._id;        
       }, 
       err => {
@@ -50,39 +43,9 @@ export class ForgotComponent implements OnInit {
         const type = 'error';
         this._alert.create(type, message);
       }
-
     ); 
-       
   }
-
-  reset(){
-
-    if(this.resetForm.value.password !== this.resetForm.value.confirm_password){
-      this.pass_matched = true;      
-    } else {
-         
-      let newdata = this.resetForm.value;
-      newdata.id = this.userId;
-      
-      this.userService.reset_password(newdata).subscribe(
-
-        data => {
-          this.pass_matched = false;     
-          this.route.navigate(['/login']);               
-        }, 
-        err => {
-          console.log('error message => ', err.error.message);
-          let message = err.error.message;
-          const type = 'error';
-          this._alert.create(type, message);
-        }
-  
-      ); 
-
-    }  
-    
-  } 
-
+ 
   BacktoForgot(){
     this.firstform = true;
     this.secondform = false; 

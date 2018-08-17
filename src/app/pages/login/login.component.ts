@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
   }
 
   checkAgreement(ischecked) {
-    debugger;
     if (ischecked) {
       this.isCheckedTerms = true;
       this.showTermsMessage = false;
@@ -121,10 +120,8 @@ export class LoginComponent implements OnInit {
   }
 
   signup2(){
-    debugger;
     if(this.isCheckedTerms)
     {
-      debugger;
       this.showTermsMessage = false;
       this.signupForm2.value.dob = moment(this.signupForm2.value.dob).format('DD-MM-YYYY');
       Object.assign(this.RegisterData, this.signupForm2.value);
@@ -133,7 +130,6 @@ export class LoginComponent implements OnInit {
       this._alert.create('success', 'Successfully register');
       if(response.success && response.message== "Register successfully.")
       {
-        debugger;
         this.loginForm.patchValue({"email" : this.signupForm1.value.email});
         this.loginForm.patchValue({"password" : this.signupForm1.value.password});
         setTimeout(()=>{    //<<<---    using ()=> syntax

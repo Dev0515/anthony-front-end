@@ -13,6 +13,7 @@ import { HistoryComponent } from '../history/history.component';
 import { SavedpostComponent } from '../savedpost/savedpost.component';
 import { MycommentsComponent } from '../mycomments/mycomments.component';
 import {TermsConditionComponent} from '../pages/terms-condition/terms-condition.component'
+import { ResetPasswordComponent } from '../pages/reset-password/reset-password.component';
 const appRoutes: Routes = [
   { 
     path: 'login', 
@@ -30,6 +31,10 @@ const appRoutes: Routes = [
   { 
     path: 'forgotpassword', 
     component: ForgotComponent 
+  },
+  {
+    path: 'resetpassword/:id',
+    component: ResetPasswordComponent
   },
   {     
     path: 'home', 
