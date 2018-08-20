@@ -133,12 +133,23 @@ export class HeaderComponent implements OnInit {
     event.preventDefault();
     $('.cd-panel2').addClass('is-visible');
   }
-
+  
   closerightbar(event){
     if( $(event.target).is('.cd-panel2') || $(event.target).is('.cd-panel-close') ) { 
       $('.cd-panel2').removeClass('is-visible');
       event.preventDefault();
     }
+  }
+
+  
+  leftbar(event){
+    event.preventDefault();
+    $('.left-sidebar-menu').addClass('is-visible');
+  }
+
+  closerleftbar(event)
+  {
+    $('.left-sidebar-menu').removeClass('is-visible');
   }
 
   logout(){
@@ -234,6 +245,7 @@ selectuser(id){
   this.route.navigate(['profile',id]);
 }
 media(){
+  debugger;
   let uid = { 'user_id': this.userId, 'token' : this.token }
   this.userService.mediauser(uid).subscribe((response) => {
     for(var i= 0; i< response.data.length; i++){

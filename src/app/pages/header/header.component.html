@@ -1,8 +1,15 @@
 <div style="padding:20px; height:auto; position: fixed; z-index:999; top:10px; left:0px; width:100%" id="h">
 	<div style="width:40%; float:left" align="left">
-		<a class="cd-btn" href="javascript:void(0)">
-			<img src="assets/images/menu1.png" style=" width:90px; height:auto">
-		</a>
+	
+    <div class="side">
+      	<a class="cd-btn" href="javascript:void(0)" (click)="leftbar($event)">
+            <img src="assets/images/menu1.png" style=" width:90px; height:auto">
+          </a>
+    </div>
+    <div class="search">
+      <input type="submit" value="" name="">
+<input type="search" value="" name="" placeholder="">
+    </div>
 	</div>
 	<div style="width:20%; float:left" align="center" class="viclys_logo" [routerLink]="['/home']">
 		<div style="max-width:90px; margin:0 auto">
@@ -10,6 +17,22 @@
 		</div>
 	</div>
 	<div style="width:40%; float:left" align="right">
+    <div class="video-element">
+<a href="#">
+    <img src="assets/images/o1.png"/>
+</a>
+<a href="#">
+    <img src="assets/images/o2.png"/>
+</a>
+<a href="#">
+    <img src="assets/images/o3.png"/>
+</a>
+    </div>
+    <div class="resp-menu">
+      <a href="#">
+      <img src="assets/images/menu3.png"/>
+    </a>
+    </div>
 		<a class="cd-btn2" href="javascript:void(0)" (click)="media()" (click)="rightbar($event)">
 			<img src="assets/images/menu2.png" style=" width:90px; height:auto">
 		</a>
@@ -308,4 +331,29 @@
 			</div>
 			<!-- cd-panel-container -->
 		</div>
-		<!-- cd-panel -->
+    <!-- cd-panel -->
+    
+    </div>
+    </div>
+
+
+    <div class="cd-panel left-sidebar-menu from-left ">
+        <header class="cd-panel-header"> 
+        <a (click)="closerleftbar($event)"  href="javascript:void(0)" class="cd-panel-close"></a>
+        </header>
+        <div class="cd-panel-container">
+        <br><br><br>
+        <div class="padding"><div class="padding">
+        <a href="#0" id="disc1">♦ BUSINESS</a><hr>
+        <a href="#0" id="disc1">♦ SHOP</a><hr> 
+        <a href="#0" id="disc1">♦ PARAMETRES</a><br>
+        <br>
+        <br>
+        
+        <p align="center">
+          <a  href="#0">
+            <img src="assets/images/i7.png" width="41" height="43" title="DECONNEXION"> </a>
+           </p></div></div>
+        
+        </div>
+        </div>

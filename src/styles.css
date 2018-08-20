@@ -1,2 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  margin: 0;
+  font-family: Microsoft YaHei, "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+.ngxcarouselPointDefault {
+  position: absolute;
+  width: 100%;
+  bottom: 30px;
+}
+.ngxcarouselPointDefault ul li {
+  width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin: 10px;
+    border: 3px solid #FC6;
+    cursor: pointer;
+    padding: 0 !important;
+    background: none;
+    position: relative;
+}
+.ngxcarouselPointDefault ul li.active {
+  transform: scale(1) !important;
+  background: #fff !important;
+}
+hr {
+  margin: 8px 0;
+}
+
+
+

@@ -1,3 +1,5 @@
+
+
 a{ 
     text-decoration:none; 
     color: #999
@@ -553,3 +555,86 @@ h4 span {
   right: 20%;
 }
 
+/* 21.8.2018 CSS start here  */
+
+.side {
+  float: left;
+  width: 30%;
+  height: auto;
+}
+.search {
+display: inline-block;
+margin-top: 13px;
+}
+.search input[type="submit"] {
+  width: 30px;
+  height: 28px;
+  background: url(/assets/images/i5.png) no-repeat center center;
+  float: left;
+  border: none;
+  background-size: 100%;
+}
+.search input[type="search"] {
+  font: 1em/1.618 Open Sans, Arial, Sans-serif;
+  border: 1px solid #505050;
+  border-width: 0 0 3px;
+  background-color: transparent;
+  padding: .1875em .375em;
+  width: 80%;
+  color: #CCC;
+}
+.resp-menu {
+  display: inline-block;
+}
+.resp-menu img {
+  width: 90px;
+  height: 61px;
+}
+.video-element {
+  display: inline-block;
+  padding-right: 13%;
+  vertical-align: top;
+  width: 187px;
+  margin-top: 19px;
+}
+.video-element img {
+  width: 30px;
+  height: 28px;
+}
+.sidebar-menu-first {
+  position: fixed;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  left: 0;
+  z-index: 9999999999999999;
+}
+
+
+
+
+
+@media (max-width:991px) {
+.video-element{
+  padding-right: 0;
+  width: 117px;
+  margin-top: 19px;
+}
+.search {
+  width: 200px;
+}
+}
+
+
+@media (max-width:800px) {
+  .search {
+    display: none;
+}
+.video-element {
+  display: none;
+}
+.resp-menu {
+  display: none;
+}
+}
