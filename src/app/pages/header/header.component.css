@@ -610,7 +610,22 @@ margin-top: 13px;
   left: 0;
   z-index: 9999999999999999;
 }
-
+a.camera-file {
+  position: relative;
+  overflow: hidden;
+}
+span.camera {
+  position: absolute;
+  width: 30px;
+  height: 28px;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 9;
+}
+span.camera input[type="file"] {
+  width: 30px;
+  height: 28px;
+}
 
 
 
@@ -637,4 +652,28 @@ margin-top: 13px;
 .resp-menu {
   display: none;
 }
+}
+
+.margin-myprofile
+{
+margin-left: 46px;
+font-size: 22px;
+}
+.mediaImg .profile-mediaimg img {
+  max-width: 172px;
+  max-height: 172px;
+  width: 100%;
+  object-fit: cover;
+}
+.profile-mediaimg video {
+  width: 100%;
+  height: auto;
+  max-width: 172px;
+}
+.profile-mediaimg {
+  height: 80px;
+  overflow: hidden;
+}
+.statu .aside p {
+  color: #efefef;
 }

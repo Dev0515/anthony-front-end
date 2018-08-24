@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxCarousel } from 'ngx-carousel';
 import { UserService } from '../../services/user.service';
 import { GlobalService } from '../../services/global.service';
+import { Subscription } from 'rxjs/Subscription';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +16,7 @@ import { GlobalService } from '../../services/global.service';
 
 export class HomeComponent implements OnInit {
   userId: String;
+  modalRef: BsModalRef;
   backend_url: String;
   token: String;
   postid: String;
@@ -40,13 +44,21 @@ export class HomeComponent implements OnInit {
   commentsreply = [];
   commentshow: Boolean = false;
   commentsshow: Boolean = false;
+  postLatestMedia= [];
+  message: any;
+  subscription: Subscription;
 
 
-  constructor(private globalService: GlobalService, private userService: UserService, private route: Router) { }
+  constructor(private globalService: GlobalService, private userService: UserService, private route: Router, private modalService: BsModalService) { }
 
   public carouselOne: NgxCarousel;
 
   ngOnInit() {
+
+    this.subscription = this.userService.getMessage().subscribe(message => {
+      this.media();
+    });
+
     this.carouselOne = {
       grid: { xs: 1, sm: 1, md: 1, lg: 1, all: 0 },
       slide: 1,
@@ -59,12 +71,15 @@ export class HomeComponent implements OnInit {
       touch: true,
       loop: true
     }
-
+   
     this.backend_url = this.globalService.backend_url;
     this.userId = localStorage.getItem('UserId');
     this.token = localStorage.getItem('token');
+    this.media();
     let data = { 'user_id': this.userId, 'token': this.token };
    this.userService.medialist(data).subscribe((response) => {
+     console.log(response.data);
+
        for (var media = 0; media < response.data.length; media++) {
         this.posts[media] = [];
         this.posts[media]['name'] = response.name;
@@ -87,10 +102,38 @@ export class HomeComponent implements OnInit {
         
       }
     });
-  
- 
   }
 
+  media(){
+    this.userId = localStorage.getItem('UserId');
+    this.token = localStorage.getItem('token');
+    let uid = { 'user_id': this.userId, 'token' : this.token }
+    this.medias = [];
+    this.userService.lastUplodedUserMedia(uid).subscribe((response) => {
+      for(var i= 0; i< response.data.length; i++){
+        this.medias[i] = [];
+        var extn = response.data[i].split(".").pop();
+        if(extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png'){
+         this.medias[i]['post'] = response.data[i];
+         this.medias[i]['type'] ='image';
+        }
+        if(extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi'){
+          this.medias[i]['post'] = response.data[i];
+          this.medias[i]['type'] = 'video';
+        }
+      }
+    });
+    console.log(this.media);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+  
+  addStatus(template)
+  {
+    this.openModal(template);
+  };
 
   like(post, userId, index) {
     let data = {

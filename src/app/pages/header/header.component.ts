@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef,TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { GlobalService } from '../../services/global.service';
 import { Router } from '@angular/router';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { ChatService } from '../../services/chat.service';
+import { FileUploader } from 'ng2-file-upload';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 declare var jquery: any;
 declare var $: any;
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',  
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
+  public uploader:FileUploader ;
+  modalRef: BsModalRef;
   userId: String;
   username: String;
   profile_pic: String = '';
@@ -45,14 +49,15 @@ export class HeaderComponent implements OnInit {
   otherId:String;
   userid:String;
   senderid :String;
+  @ViewChild('myInput') myInputVariable: ElementRef;
 
  
- constructor(private globalService: GlobalService, private userService: UserService, private route: Router,private chatService: ChatService) { }
+ constructor(private globalService: GlobalService, private userService: UserService, private route: Router,private chatService: ChatService, private modalService: BsModalService,) {
+
+  }
 
 
   ngOnInit() {
-    
-
     this.chatService
     .getMessages()
     .subscribe((message) => {
@@ -128,6 +133,21 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+ // Open Modal
+ openModal(template: TemplateRef<any>) {
+  this.modalRef = this.modalService.show(template);
+}
+
+addStatus(template)
+{
+  this.openModal(template);
+};
+
+closeModal() {
+  this.modalRef.hide();
+}
+
+
 
   rightbar(event){    
     event.preventDefault();
@@ -183,15 +203,35 @@ export class HeaderComponent implements OnInit {
   uploadfile(e: Event){       
     const target: HTMLInputElement = e.target as HTMLInputElement;
     var length = target.files.length;
+    var countlength = target.files.length;
+    this.mediaSets(length,this.userId);
     for(var i=0; i<length; i++){
       let file = target.files[i];
-      let data = { 'id' : this.userId, 'upload_file' : file, 'token' : this.token};
+      let data = { 'id' : this.userId,'mediaSetLength': countlength, 'upload_file' : file, 'token' : this.token};
     this.userService.upload_file(data).subscribe((response)  => {
         console.log('Current Profile => ', response );  
+       
       });
   }
+  
   window.alert("File is uploaded.");
-  location.reload();
+  this.userService.sendMessage('sth');
+  // this.reset();
+  // location.reload();
+  }
+
+  reset() {
+    console.log(this.myInputVariable.nativeElement.files);
+    this.myInputVariable.nativeElement.value = "";
+    console.log(this.myInputVariable.nativeElement.files);
+}
+
+  mediaSets(length,Userid)
+  {
+    this.userService.MediaSet({'length':length,'token' : this.token, 'Userid': Userid }).subscribe((response)  => {
+      console.log('Current Profile => ', response );  
+    });
+    
   }
 
 
@@ -244,23 +284,23 @@ selectuser(id){
   console.log('id', id)
   this.route.navigate(['profile',id]);
 }
+
 media(){
-  debugger;
   let uid = { 'user_id': this.userId, 'token' : this.token }
   this.userService.mediauser(uid).subscribe((response) => {
     for(var i= 0; i< response.data.length; i++){
+      this.medias[i] = [];
       var extn = response.data[i].split(".").pop();
       if(extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png'){
-       this.medias[i] = response.data[i];
-       this.medias['type'] ='image';
-      }
-      if(extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi'){
-        this.medias[i] = response.data[i];
-        this.medias['type'] = 'video';
-
-      }
-      
+        this.medias[i]['post'] = response.data[i];
+        this.medias[i]['type'] ='image';
+       }
+       if(extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi'){
+         this.medias[i]['post'] = response.data[i];
+         this.medias[i]['type'] = 'video';
+       }
     }
+    console.log(this.medias);
   });
 }
 

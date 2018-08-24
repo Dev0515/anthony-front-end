@@ -1,67 +1,52 @@
-<div class="homepage">
+  <div class="homepage">
     <app-header></app-header>
     <div style="position: fixed; top:0; left:0; z-index:100; height:100vh; width:100%;-webkit-transition: all 1.5s ease; -moz-transition: all 1.5s ease; -o-transition: all 1s ease;-ms-transition: all 1.5s ease; transition: all 1.5s ease;"
      id="p">
      
       <div class="wrap wrap-index" id="slider">
-        <!-- CAROUSEL-->
-        <div >
+  
+        <div  class="mb-50">
   <ngx-carousel [inputs]="carouselOne" (carouselLoad)="myfunc($event)" class="pos_rel">
-            <ngx-item NgxCarouselItem>
-              
-              <div>
-                <img src="/assets/images/s1.jpg" width="500px" height="300px">
+            <ngx-item NgxCarouselItem *ngFor="let mediaFile of medias">
+             
+              <div *ngIf="mediaFile.type == 'image'">
+                <img src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px">
+              </div>
+              <div *ngIf="mediaFile.type == 'video'">
+                <video class="banner-video" controls autoplay  src="{{backend_url}}uploads/{{mediaFile.post}}" loop width="500px" height="300px"> </video>
               </div>
             </ngx-item>
-            
-            <ngx-item NgxCarouselItem>
-                <div>
-                  <img src="/assets/images/s2.jpg" width="500px" height="300px">
-                </div>
-              </ngx-item>
             <button NgxCarouselPrev class='leftRs'>&lt;</button>
             <button NgxCarouselNext class='rightRs'>&gt;</button>
           </ngx-carousel>
-      
         </div>
-  
-        <!-- CAROUSEL-->
-        <div class="caption">
-          <h6>Scroll Down</h6>
-          <p>v</p>
-        </div>
-  
-  
       </div>
-  
-  
     </div>
    
   
   
     <div id="content">
-    <section class="module content sec1">
-        <div class="container" align="center"><h2>SECTION 1</h2></div>
-        </section>
-        <section style="background-image:url(/assets/images/s1.jpg);" class="module parallax parallax-1">
-            <div class="container"> </div>
-            </section>
-            
-  
-    <!-- Section 2 start here  -->
-    <section class="module content">
-        <div class="container" align="center"><h2>SECTION 2</h2></div>
-        </section>
-    <section style="background-image:url(/assets/images/s2.jpg);" class="module parallax parallax-2">
-        <div class="container"> </div>
-        </section>
-      </div>
+      <section class="module content sec1">
+          <div class="container" align="center"><h2>SECTION 1</h2></div>
+          </section>
+          <section style="background-image:url(/assets/images/s1.jpg);" class="module parallax parallax-1">
+              <div class="container"> </div>
+              </section>
+              
+    
+      <section class="module content">
+          <div class="container" align="center"><h2>SECTION 2</h2></div>
+          </section>
+      <section style="background-image:url(/assets/images/s2.jpg);" class="module parallax parallax-2">
+          <div class="container"> </div>
+          </section>
+        </div>
   
   
   
       <div class="grid" align="left">
           <div style="text-align:right; float:left"><a class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></a> </div>
-           <div style="padding:20px; float:left; width:70%; font-size:14px"><span>Name<br>City </span><br><br>
+           <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
           <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
           <a href="#"><img src="assets/images/i2.png" width="30" height="28"> </a>
           <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
@@ -69,7 +54,89 @@
           <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
            </div>
   </div>
+
+
   
+
+
+
+
+
+
+  <!-- <div class="homepage">
+    <app-header></app-header>
+    <div style="position: fixed; top:0; left:0; z-index:100; height:100vh; width:100%;-webkit-transition: all 1.5s ease; -moz-transition: all 1.5s ease; -o-transition: all 1s ease;-ms-transition: all 1.5s ease; transition: all 1.5s ease;"
+     id="p">
+      <div class="wrap wrap-index" id="slider">
   
+        <div *ngFor="let post of posts" class="mb-50">
+            
+  <ngx-carousel [inputs]="carouselOne" (carouselLoad)="myfunc($event)" class="pos_rel">
+            <ngx-item NgxCarouselItem *ngFor="let mediaFile of post">
+              
+              <div *ngIf="mediaFile.type == 'image'">
+                <img src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px">
+              </div>
+              <div *ngIf="mediaFile.type == 'video'">
+                <video controls src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px"> </video>
+              </div>
+            </ngx-item>
+            <button NgxCarouselPrev class='leftRs'>&lt;</button>
+            <button NgxCarouselNext class='rightRs'>&gt;</button>
+          </ngx-carousel>
+          
+          <button (click)="like(post.id,userId,post.index)" class="f_btn">
+            <span *ngIf="post.index == index">{{countlike}}</span>
+            <span *ngIf="post.index != index">{{post.likes}}</span>
+            <i class="fas fa-thumbs-up"></i> Like
+          </button>
   
+          <button (click)="allComment(post.id,post.index)" class="f_btn">
+            <span>{{allcomments.length}}</span>
+            <i class="fas fa-comment"></i> Comment 
+          </button>
   
+          <button (click)="savepost(post.id)" class="f_btn">
+            <i class="fas fa-share"></i> Save
+          </button>
+               
+          <button (click)="like()" class="f_btn">
+            <span>0</span>
+            <i class="fas fa-share"></i> Share
+          </button>
+  
+          <button (click)="editPost(post.id)" class="f_btn" *ngIf="post.currentuser == post.user_id">
+            <i class="fas fa-share"></i> Modify
+          </button>
+          
+      
+      
+          <div *ngFor="let comment of allcomments">
+            <div style="color:white" *ngIf="post.index == indexs">{{comment.comment}}
+              <button (click)="getcomment(comment._id)">Edit</button>
+              <button (click)="deletecomment(comment._id,post.id,post.index)">Delete</button>
+              <div *ngIf="comment._id == commentid">
+                <div *ngFor="let comment of commentsreply">
+                  <div>{{comment}}</div>
+                </div>
+              </div>
+              <p *ngIf="commentshow == true">{{commentreply}}</p>
+              <div *ngIf="comment._id == comment_id">
+                <input (keyup)="$event.keyCode == 13 && replycomment($event,comment._id,post.id) ">
+              </div>
+              <button (click)="reply(comment._id)">Reply</button>
+              <div *ngIf="comment._id == commentid">
+                <div *ngIf="editshow == true">
+                  <input value={{commentedit}} (keyup)="$event.keyCode == 13 && editcomment($event,comment._id,post.id,post.index)">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="post.index == indexs">
+            <input (keyup)="$event.keyCode == 13 && postComment($event,post.id,post.index) ">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div> -->

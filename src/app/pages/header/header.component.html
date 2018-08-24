@@ -1,308 +1,305 @@
+
+
 <div style="padding:20px; height:auto; position: fixed; z-index:999; top:10px; left:0px; width:100%" id="h">
-	<div style="width:40%; float:left" align="left">
-	
+  <div style="width:40%; float:left" align="left">
+
     <div class="side">
-      	<a class="cd-btn" href="javascript:void(0)" (click)="leftbar($event)">
-            <img src="assets/images/menu1.png" style=" width:90px; height:auto">
-          </a>
+      <a class="cd-btn" href="javascript:void(0)" (click)="leftbar($event)">
+        <img src="assets/images/menu1.png" style=" width:90px; height:auto">
+      </a>
     </div>
     <div class="search">
       <input type="submit" value="" name="">
-<input type="search" value="" name="" placeholder="">
+      <input type="search" value="" name="" placeholder="">
     </div>
-	</div>
-	<div style="width:20%; float:left" align="center" class="viclys_logo" [routerLink]="['/home']">
-		<div style="max-width:90px; margin:0 auto">
-			<img src="assets/images/viclys.png" style=" width:100%; height:auto">
-		</div>
-	</div>
-	<div style="width:40%; float:left" align="right">
+  </div>
+  <div style="width:20%; float:left" align="center" class="viclys_logo" [routerLink]="['/home']">
+    <div style="max-width:90px; margin:0 auto">
+      <img src="assets/images/viclys.png" style=" width:100%; height:auto">
+    </div>
+  </div>
+
+  <div style="width:40%; float:left" align="right">
     <div class="video-element">
-<a href="#">
-    <img src="assets/images/o1.png"/>
-</a>
-<a href="#">
-    <img src="assets/images/o2.png"/>
-</a>
-<a href="#">
-    <img src="assets/images/o3.png"/>
-</a>
+      <a class="camera-file">
+        <span class="camera">
+          <input id="file" multiple accept=".jpeg,.jpg,.png,.gif" (change)="uploadfile($event)" type="file"> </span>
+        <img src="assets/images/o1.png" />
+      </a>
+
+      <a class="camera-file">
+        <span class="camera">
+          <input type="file" multiple accept=".mov,.mp4,.webm,.avi" myInput (change)="uploadfile($event)"> </span>
+        <img src="assets/images/o2.png" />
+      </a>
+      <a (click)="addStatus(statusTemp)">
+        <img src="assets/images/o3.png" />
+      </a>
     </div>
     <div class="resp-menu">
       <a href="#">
-      <img src="assets/images/menu3.png"/>
-    </a>
+        <img src="assets/images/menu3.png" />
+      </a>
     </div>
-		<a class="cd-btn2" href="javascript:void(0)" (click)="media()" (click)="rightbar($event)">
-			<img src="assets/images/menu2.png" style=" width:90px; height:auto">
-		</a>
-	</div>
+    <a class="cd-btn2" href="javascript:void(0)" (click)="media()" (click)="rightbar($event)">
+      <img src="assets/images/menu2.png" style=" width:90px; height:auto">
+    </a>
+  </div>
+
+  <!-- showing the event data -->
+
 </div>
+
+
 
 <!-- Right Bar -->
 <div class="cd-panel2 from-right" style=" overflow:scroll" (click)="closerightbar($event)">
-	<header class="cd-panel-header">
-		<a href="javascript:void(0)" class="cd-panel-close"> </a>
-	</header>
+  <header class="cd-panel-header">
+    <a href="javascript:void(0)" class="cd-panel-close"> </a>
+  </header>
 
-	<div class="cd-panel-container2">
-		<div class="skltbs fade-scale has-animation">
-			<ul class="tab-nav">
-				<li role="presentation" class="skltbs-tab-item">
-					<a class="button active skltbs-tab" href="#one">PROFIL</a>
-				</li>
-				<li role="presentation" class="skltbs-tab-item">
-					<a class="button skltbs-tab" (click)="suggestfriend()" href="#two">STATUT</a>
-				</li>
-				<li role="presentation" class="skltbs-tab-item">
-					<a class="button skltbs-tab" href="#three">DISCUSSION</a>
-				</li>
-				<li role="presentation" class="skltbs-tab-item">
-					<a class="button skltbs-tab" href="#four">ALERTE
-						<span *ngIf="friendreq_alerts" class="badge">{{total_friendreq}}</span>
-					</a>
-				</li>
-				<li role="presentation" class="skltbs-tab-item">
-					<a class="button skltbs-tab" href="#five">SHOP</a>
-				</li>
-			</ul>
-			<hr>
+  <div class="cd-panel-container2">
+    <div class="skltbs fade-scale has-animation">
+      <ul class="tab-nav">
+        <li role="presentation" class="skltbs-tab-item">
+          <a class="button active skltbs-tab" href="#one">PROFIL</a>
+        </li>
+        <li role="presentation" class="skltbs-tab-item">
+          <a class="button skltbs-tab" (click)="suggestfriend()" href="#two">STATUT</a>
+        </li>
+        <li role="presentation" class="skltbs-tab-item">
+          <a class="button skltbs-tab" href="#three">DISCUSSION</a>
+        </li>
+        <li role="presentation" class="skltbs-tab-item">
+          <a class="button skltbs-tab" href="#four">ALERTE
+            <span *ngIf="friendreq_alerts" class="badge">{{total_friendreq}}</span>
+          </a>
+        </li>
+        <li role="presentation" class="skltbs-tab-item">
+          <a class="button skltbs-tab" href="#five">SHOP</a>
+        </li>
+      </ul>
+      <hr>
 
-			<div class="tab-content">
-				<!-- <div style="color:aliceblue" *ngFor="let message of messages">
+      <div class="tab-content">
+        <!-- <div style="color:aliceblue" *ngFor="let message of messages">
                     <p style="color:aliceblue">{{message.message}}</p>
                     </div> -->
-				<!-- <input (*ngModel)="message" (keyup)="$event.keyCode == 13 && sendMessage($event)" />
+        <!-- <input (*ngModel)="message" (keyup)="$event.keyCode == 13 && sendMessage($event)" />
                 <button (click)="sendMessage($event)">Send</button> -->
 
-				<div class="tab-pane active" id="one" style="background-image:url(/assets/images/s2.jpg)">
-					<div class="Grid">
-						<div class="Grid-col-12 numb" align="left">{{userId}}</div>
-						<div class="Grid-col-12 hding" align="center">
-							<h2>PROFIL</h2>
-							<br>
-							<br>
-						</div>
-						<div class="f_div">
-							<div class="Grid-c1 Grid-c11" align="center">
+        <div class="tab-pane active" id="one" style="background-image:url(/assets/images/s2.jpg)">
+          <div class="Grid">
+            <div class="Grid-col-12 numb margin-myprofile"  align="left">{{username}}</div>
+            <div class="Grid-col-12 hding" align="center">
+              <h2>PROFIL</h2>
+              <br>
+              <br>
+            </div>
+            <div class="f_div">
+              <div class="Grid-c1 Grid-c11" align="center">
 
-								<div class="profile_p">
-									<div *ngIf="profile_pic; else default; ">
-										<img src="{{backend_url}}profile_pics/{{profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
-									</div>
+                <div class="profile_p">
+                  <div *ngIf="profile_pic; else default; ">
+                    <img src="{{backend_url}}profile_pics/{{profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                  </div>
 
-									<ng-template #default>
-										<img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
-									</ng-template>
+                  <ng-template #default>
+                    <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                  </ng-template>
 
-									<div class="profile_b">
-										<span>
-											<i class="fa fa-edit"></i> Edit</span>
-										<form [formGroup]="profilepicForm">
-											<input class="" type="file" (change)="uploadProfilePic($event)" name="profile_pic" accept="image/*" formControlName="profile_pic">
-										</form>
-									</div>
-								</div>
-								<div class="p_name">
-									<h5>{{username}}</h5>
-									<h5>{{country}}</h5>
-								
-								</div>
-							
+                  <div class="profile_b">
+                    <span>
+                      <i class="fa fa-edit"></i> Edit</span>
+                    <form [formGroup]="profilepicForm">
+                      <input class="" type="file" (change)="uploadProfilePic($event)" name="profile_pic" accept="image/*" formControlName="profile_pic">
+                    </form>
+                  </div>
+                </div>
+                <div class="p_name">
+                  <h5>{{username}}</h5>
+                  <h5>{{country}}</h5>
 
-					
-								<div class="p_browse_file">
-									<div class="custm_inp">Browse...</div>
-									<input id="file" multiple (change)="uploadfile($event)" type="file">
-								</div>
-								<!---<div *ngFor="let media of medias">
+                </div>
+
+
+
+                <div class="p_browse_file">
+                  <div class="custm_inp">Browse...</div>
+                  <input id="file" multiple (change)="uploadfile($event)" type="file">
+                </div>
+                <!---<div *ngFor="let media of medias">
 										<div *ngIf="media.type == image">
 											<img src="{{backend_url}}uploads/{{media}}" width="50" height="80px">
 										</div>
 									</div>-->
 
+              </div>
 
+              <div class="Grid-c2 Grid-c22 pro_last" style="text-align:left; ">
+                <a [routerLink]="['/history']">&rsaquo; Media</a>
+                <hr>
+                <a [routerLink]="['/mycomment']">&rsaquo; My comments</a>
+                <hr>
+                <a href="javascript:void(0)" [routerLink]="['/friends']">&rsaquo; Friends</a>
+                <hr>
+                <a [routerLink]="['/savedpost']">&rsaquo; Saved</a>
+                <hr>
+                <a href="javascript:void(0)" [routerLink]="['/edit']">&rsaquo; Edit Profile</a>
+                <hr>
+                <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a>
+              </div>
+              <div align="center" class="Grid">
+                <h2 style="color:#999;">Media Posts</h2>
+                <hr>
+              </div>
+              <div class="mediaImg">
+                <div *ngFor="let media of medias" class="profile-mediaimg">
+                  <div *ngIf="media.type == 'image'">
+                    <img src="{{backend_url}}uploads/{{media.post}}" width="100px" height="80px">
+                  </div>
+                  <div *ngIf="media.type == 'video'">
+                    <video autoplay loop src="{{backend_url}}uploads/{{media.post}}" width="100px" height="80px"> </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-				
-		
+        <div class="tab-pane statu" id="two">
+          <div align="center" class="Grid">
+            <h2>STATUT</h2>
+            <hr>
+            <div class="aside">
+              <form [formGroup]="statusForm">
+                <input type="text" class="" formControlName="status" placeholder="Add Status" required>
+                <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
+                  <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
+                    Please enter status.
+                  </div>
+                </div>
+                <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
+              </form>
+              <div *ngIf="showstatus">
+                <p style="color:red">{{Message}}</p>
+              </div>
+              <div *ngIf="getallstatus">
+                <div class="padding" align="left" *ngFor="let status of Status">
+                  <p>
+                    <a href="javascript:void(0)" style="color:#FC0">@{{status.user_id.name}} :</a> {{status.status}}
+                  </p>
+                  <hr>
+                </div>
+              </div>
+              <div class="padding" align="left" *ngIf="userstatus">
+                <p>
+                  <a href="javascript:void(0)" style="color:#FC0">Your status :</a> {{status}}
+                </p>
+                <hr>
+              </div>
+            </div>
+            <div class="side vl2">
+              SUGESTION
+              <hr>
+              <br>
+              <br>
+              <div class="padding profile_p" *ngFor="let friends of suggested_friends">
+                <p>{{friends._id}}</p>
+                <div (click)="selectuser(friends._id)">+{{friends.name}}
+                  <br>
+                  <div *ngIf="profile_pic; else default; ">
+                    <img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                  </div>
+                  <ng-template #default>
+                    <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                  </ng-template>
+                </div>
 
-								
+              </div>
+            </div>
 
+          </div>
+        </div>
 
-											
-
-							</div>
-
-							<div class="Grid-c2 Grid-c22 pro_last" style="text-align:left; ">
-								<a [routerLink]="['/history']">&rsaquo; History</a>
-								<hr>
-								<a [routerLink]="['/mycomment']">&rsaquo; My comments</a>
-								<hr>
-								<a href="javascript:void(0)" [routerLink]="['/friends']">&rsaquo; Friends</a>
-								<hr>
-								<a [routerLink]="['/savedpost']">&rsaquo; Saved</a>
-								<hr>
-								<a href="javascript:void(0)" [routerLink]="['/edit']">&rsaquo; Edit Profile</a>
-								<hr>
-								<a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a>
-							</div>
-
-						
-														<div align="center" class="Grid">
-															<h2 style="color:#999;">Media Posts</h2>
-															<hr>
-														
-														</div>
-													
-												<div class="mediaImg">
-												<div *ngFor="let media of medias" class="profile-mediaimg">
-														<div *ngIf="media.type == image">
-															<img src="{{backend_url}}uploads/{{media}}" width="100px" height="80px">
-														</div>
-													</div>
-													</div>
-
-
-
-							</div>
-
-						
-											
-					</div>
-				</div>
-
-				<div class="tab-pane statu" id="two">
-					<div align="center" class="Grid">
-						<h2>STATUT</h2>
-						<hr>
-						<div class="aside">
-							<form [formGroup]="statusForm">
-								<input type="text" class="" formControlName="status" placeholder="Add Status" required>
-								<div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
-									<div class="error_message" *ngIf="statusForm.controls.status.errors.required">
-										Please enter status.
-									</div>
-								</div>
-								<button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
-							</form>
-							<div *ngIf="showstatus">
-								<p style="color:red">{{Message}}</p>
-							</div>
-							<div *ngIf="getallstatus">
-								<div class="padding" align="left" *ngFor="let status of Status">
-									<p>
-										<a href="javascript:void(0)" style="color:#FC0">@{{status.user_id.name}} :</a> {{status.status}}
-									</p>
-									<hr>
-								</div>
-							</div>
-							<div class="padding" align="left" *ngIf="userstatus">
-								<p>
-									<a href="javascript:void(0)" style="color:#FC0">Your status :</a> {{status}}
-								</p>
-								<hr>
-							</div>
-						</div>
-						<div class="side vl2">
-							SUGESTION
-							<hr>
-							<br>
-							<br>
-							<div class="padding profile_p" *ngFor="let friends of suggested_friends">
-								<p>{{friends._id}}</p>
-								<div (click)="selectuser(friends._id)">+{{friends.name}}
-									<br>
-									<div *ngIf="profile_pic; else default; ">
-										<img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
-									</div>
-									<ng-template #default>
-										<img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
-									</ng-template>
-								</div>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="tab-pane discussion" id="three">
-					<div align="center" class="Grid">
-						<h2>DISCUSSION</h2>
-						<hr>
-						<div class="side">
-							<!-- <p class="padding">(2) personnes en ligne :</p>
+        <div class="tab-pane discussion" id="three">
+          <div align="center" class="Grid">
+            <h2>DISCUSSION</h2>
+            <hr>
+            <div class="side">
+              <!-- <p class="padding">(2) personnes en ligne :</p>
                           <br><br> -->
-							<div class="friends_list">
-								<h4 style="color:white">Friends</h4>
+              <div class="friends_list">
+                <h4 style="color:white">Friends</h4>
 
-								<div *ngIf="listfriends.length > 0">
-									<div class="friends_list_div" *ngFor="let friend of listfriends" (click)="chat(friend._id)">
-										<div *ngIf="friend.profile_pic; else default; ">
-											<img src="{{backend_url}}profile_pics/{{friend.profile_pic}}" width="50" height="50" id="profile_image" class="zoom">
-											<p style="color:white">
-												<span *ngIf="friend.online == 1">{{messages}}</span> <p>{{friend.name | titlecase}}</p>
-												<!--<p>{{friend._id}}</p>------>
-										</div>
-										<ng-template #default>
-											<img src="assets/images/profil.png" width="50" height="50" id="profile_image" class="zoom">
-											<p style="color:white">
-												{{friend.name | titlecase}}</p>
-										</ng-template>
+                <div *ngIf="listfriends.length > 0">
+                  <div class="friends_list_div" *ngFor="let friend of listfriends" (click)="chat(friend._id)">
+                    <div *ngIf="friend.profile_pic; else default; ">
+                      <img src="{{backend_url}}profile_pics/{{friend.profile_pic}}" width="50" height="50" id="profile_image" class="zoom">
+                      <p style="color:white">
+                        <span *ngIf="friend.online == 1">{{messages}}</span>
+                        <p>{{friend.name | titlecase}}</p>
+                        <!--<p>{{friend._id}}</p>------>
+                    </div>
+                    <ng-template #default>
+                      <img src="assets/images/profil.png" width="50" height="50" id="profile_image" class="zoom">
+                      <p style="color:white">
+                        {{friend.name | titlecase}}</p>
+                    </ng-template>
 
-										<div class="clearfix"></div>
-									</div>
-								</div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
 
-								<div *ngIf="listfriends.length === 0">
-									<div class="">You have no friends yet.</div>
-								</div>
+                <div *ngIf="listfriends.length === 0">
+                  <div class="">You have no friends yet.</div>
+                </div>
 
-							</div>
-							<!-- friends_list -->
-						</div>
-						<!-- chating part -->
-						<div *ngIf="chatid.indexOf(userId) != -1">
-							<div *ngFor="let message of messages">
-								<div *ngIf="message.senderid == userId" style="color:white">{{message.message}}</div>
-								<div *ngIf="message.senderid != userId" style="color:#FC0">{{message.message}}</div>
-							</div>
-						</div>
-						<div *ngIf="chatboard == true">
-							<input (*ngModel)="message" #chat (keyup)="$event.keyCode == 13 && sendMessage($event,otherid)">
-							<button (click)="sendMessage($chat,otherid)">Send</button>
-						</div>
-						<!-- chating part -->
+              </div>
+              <!-- friends_list -->
+            </div>
+            <!-- chating part -->
+            <div *ngIf="chatid.indexOf(userId) != -1">
+              <div *ngFor="let message of messages">
+                <div *ngIf="message.senderid == userId" style="color:white">{{message.message}}</div>
+                <div *ngIf="message.senderid != userId" style="color:#FC0">{{message.message}}</div>
+              </div>
+            </div>
+            <div *ngIf="chatboard == true">
+              <input (*ngModel)="message" #chat (keyup)="$event.keyCode == 13 && sendMessage($event,otherid)">
+              <button (click)="sendMessage($chat,otherid)">Send</button>
+            </div>
+            <!-- chating part -->
 
-						<div class="tab-pane alerte" id="four">
-							<div align="center" class="Grid">
-								<h2>ALERTE</h2>
-								<hr>
-								<div class="equal-col vl padding" align="left">
-									<p align="center">NOTIFICATIONS</p>
-									<hr>
-									<br>Vous n'avez aucune notification pour le moment
-								</div>
-								<div class="equal-col padding " align="left">
-									<p align="center">DEMANDES D'AMI</p>
-									<hr>
-									<br>
-									<div *ngIf="friendrequests.length > 0">
-										<span *ngFor="let friend of friendrequests">
-											<a class="demandeami" (click)="senderprofile(friend.sender_id._id)"> + {{friend.sender_id.name}} </a>
-										</span>
-									</div>
-									<div *ngIf="(friendrequests | json) === '{}'">
-										<div class="">No new friend request.</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane" id="five">
-							<div align="center" class="Grid">
-								<h2>SHOP</h2>
-								<hr>
-								<!-- <div class="equal-col vl padding" align="left">
+            <div class="tab-pane alerte" id="four">
+              <div align="center" class="Grid">
+                <h2>ALERTE</h2>
+                <hr>
+                <div class="equal-col vl padding" align="left">
+                  <p align="center">NOTIFICATIONS</p>
+                  <hr>
+                  <br>Vous n'avez aucune notification pour le moment
+                </div>
+                <div class="equal-col padding " align="left">
+                  <p align="center">DEMANDES D'AMI</p>
+                  <hr>
+                  <br>
+                  <div *ngIf="friendrequests.length > 0">
+                    <span *ngFor="let friend of friendrequests">
+                      <a class="demandeami" (click)="senderprofile(friend.sender_id._id)"> + {{friend.sender_id.name}} </a>
+                    </span>
+                  </div>
+                  <div *ngIf="(friendrequests | json) === '{}'">
+                    <div class="">No new friend request.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="five">
+              <div align="center" class="Grid">
+                <h2>SHOP</h2>
+                <hr>
+                <!-- <div class="equal-col vl padding" align="left">
                           <p align="center">NOTIFICATIONS</p><hr>
                           <br>Vous n'avez aucune notification pour le moment 
                       </div>
@@ -315,45 +312,81 @@
                           <a class="demandeami"> + Dimitrious </a>
                           <a class="demandeami"> + Benjamin </a>
                       </div>  -->
-							</div>
-						</div>
-						<div *ngFor="let media of medias">
-							<div *ngIf="media.type == image">
-								<img src="{{backend_url}}uploads/{{media}}" width="100px" height="80px">
-							</div>
-							<div *ngIf="media.type == video">
-								<video controls src="{{backend_url}}uploads/{{media}}" width="100px" height="80px"> </video>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- cd-panel-content -->
-			</div>
-			<!-- cd-panel-container -->
-		</div>
+              </div>
+            </div>
+            <div *ngFor="let media of medias">
+              <div *ngIf="media.type == image">
+                <img src="{{backend_url}}uploads/{{media}}" width="100px" height="80px">
+              </div>
+              <div *ngIf="media.type == video">
+                <video controls src="{{backend_url}}uploads/{{media}}" width="100px" height="80px"> </video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- cd-panel-content -->
+      </div>
+      <!-- cd-panel-container -->
+    </div>
     <!-- cd-panel -->
-    
-    </div>
-    </div>
+
+  </div>
+</div>
 
 
-    <div class="cd-panel left-sidebar-menu from-left ">
-        <header class="cd-panel-header"> 
-        <a (click)="closerleftbar($event)"  href="javascript:void(0)" class="cd-panel-close"></a>
-        </header>
-        <div class="cd-panel-container">
-        <br><br><br>
-        <div class="padding"><div class="padding">
-        <a href="#0" id="disc1">♦ BUSINESS</a><hr>
-        <a href="#0" id="disc1">♦ SHOP</a><hr> 
-        <a href="#0" id="disc1">♦ PARAMETRES</a><br>
+<div class="cd-panel left-sidebar-menu from-left ">
+  <header class="cd-panel-header">
+    <a (click)="closerleftbar($event)" href="javascript:void(0)" class="cd-panel-close"></a>
+  </header>
+  <div class="cd-panel-container">
+    <br>
+    <br>
+    <br>
+    <div class="padding">
+      <div class="padding">
+        <a href="#0" id="disc1">♦ BUSINESS</a>
+        <hr>
+        <a href="#0" id="disc1">♦ SHOP</a>
+        <hr>
+        <a href="#0" id="disc1">♦ PARAMETRES</a>
         <br>
         <br>
-        
+        <br>
+
         <p align="center">
-          <a  href="#0">
+          <a href="#0">
             <img src="assets/images/i7.png" width="41" height="43" title="DECONNEXION"> </a>
-           </p></div></div>
-        
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<ng-template #statusTemp>
+  <div class="write-pop">
+    <form [formGroup]="statusForm">
+      <h5><img src="/assets/images/o3.png"/>Write A Status</h5>
+<div class="write-form">
+        <input type="text" class="" formControlName="status" placeholder="Add Status" required>
+        <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
+          <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
+            Please enter status.
+          </div>
         </div>
+        <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
+      </div>
+      </form>
+      <div *ngIf="showstatus">
+          <p style="color:red">{{Message}}</p>
         </div>
+        <button aria-label="Close" class="close pull-right" type="button" (click)="closeModal()">
+            <span aria-hidden="true">×</span>
+          </button>
+    <!-- <button type="button" class="btn btn-warning btn-wd" (click)="closeModal()">
+        X
+      </button> -->
+    </div>
+    </ng-template>

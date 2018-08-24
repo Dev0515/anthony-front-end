@@ -200,14 +200,32 @@ button.rightRs, button.leftRs {
   padding-top:10%;
 }
 .grid {
-  position:fixed;bottom:0;left:20px; z-index:999; color:#FFF; text-align:left ; width:450px;
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  z-index: 999;
+  color: #FFF;
+  text-align: left;
+  width: auto;
+  background-color: rgba(255,255,255,0.5);
+  padding: 20px;
 }
 .grid span {
   font-family: Microsoft YaHei, "Source Sans Pro", Helvetica, Arial, sans-serif;
+  color: #000;
 }
 .sec1 {
   background: #000;
 }
 .sec1 h2 {
   color: #fff;
+}
+.banner-video {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  width:100%;
+  height: auto;
 }

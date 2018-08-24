@@ -29,6 +29,8 @@ import { SavedpostComponent } from './savedpost/savedpost.component';
 import { MycommentsComponent } from './mycomments/mycomments.component';
 import { TermsConditionComponent } from './pages/terms-condition/terms-condition.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     //HttpModule,
     HttpClientModule,
     JasperoAlertsModule,
-    NgxCarouselModule
+    NgxCarouselModule,
+    FileUploadModule,
+    ModalModule.forRoot(),
   ],
   providers: [UserService, GlobalService, AuthguardService,NoAuthguardService,ChatService],
   bootstrap: [AppComponent]
