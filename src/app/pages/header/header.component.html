@@ -1,5 +1,3 @@
-
-
 <div style="padding:20px; height:auto; position: fixed; z-index:999; top:10px; left:0px; width:100%" id="h">
   <div style="width:40%; float:left" align="left">
 
@@ -90,7 +88,7 @@
 
         <div class="tab-pane active" id="one" style="background-image:url(/assets/images/s2.jpg)">
           <div class="Grid">
-            <div class="Grid-col-12 numb margin-myprofile"  align="left">{{username}}</div>
+            <div class="Grid-col-12 numb margin-myprofile" align="left">{{username}}</div>
             <div class="Grid-col-12 hding" align="center">
               <h2>PROFIL</h2>
               <br>
@@ -121,9 +119,6 @@
                   <h5>{{country}}</h5>
 
                 </div>
-
-
-
                 <div class="p_browse_file">
                   <div class="custm_inp">Browse...</div>
                   <input id="file" multiple (change)="uploadfile($event)" type="file">
@@ -172,18 +167,8 @@
             <h2>STATUT</h2>
             <hr>
             <div class="aside">
-              <form [formGroup]="statusForm">
-                <input type="text" class="" formControlName="status" placeholder="Add Status" required>
-                <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
-                  <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
-                    Please enter status.
-                  </div>
-                </div>
-                <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
-              </form>
-              <div *ngIf="showstatus">
-                <p style="color:red">{{Message}}</p>
-              </div>
+              
+            
               <div *ngIf="getallstatus">
                 <div class="padding" align="left" *ngFor="let status of Status">
                   <p>
@@ -192,6 +177,20 @@
                   <hr>
                 </div>
               </div>
+              <form [formGroup]="statusForm" class="status-form">
+                <input type="text" class="" formControlName="status" placeholder="Add Status" required>
+                <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
+                  <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
+                    Please enter status.
+                  </div>
+                </div>
+                <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
+                <h5>Write a Thought...</h5>
+                <div *ngIf="showstatus">
+                  <p style="color:red">{{Message}}</p>
+                </div>
+               
+              </form>
               <div class="padding" align="left" *ngIf="userstatus">
                 <p>
                   <a href="javascript:void(0)" style="color:#FC0">Your status :</a> {{status}}
@@ -205,19 +204,45 @@
               <br>
               <br>
               <div class="padding profile_p" *ngFor="let friends of suggested_friends">
-                <p>{{friends._id}}</p>
-                <div (click)="selectuser(friends._id)">+{{friends.name}}
-                  <br>
-                  <div *ngIf="profile_pic; else default; ">
-                    <img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
-                  </div>
+                <!-- <p>{{friends._id}}</p> -->
+
+                <div class="profile-text" (click)="selectuser(friends._id)">+{{friends.name}}
+
+
                   <ng-template #default>
                     <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
                   </ng-template>
                 </div>
-
+                <div *ngIf="profile_pic; else default; ">
+                  <img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                </div>
+                <div class="add-remove">
+                  <a (click)="addfriend(friends._id, $event)" class="btn btn-info">Add</a>
+                  <a href="#" class="btn btn-success">Remove</a>
+                </div>
               </div>
             </div>
+
+
+            <!-- <div class="friends_list suggestions">
+              <h4>Suggestions</h4>         
+              <div class="friends_list_div" *ngFor="let friend of suggested_friends">
+                  <div *ngIf="friend.profile_pic; else default;">
+                      <img (click)="selectuser(friend._id)" src="{{backend_url}}profile_pics/{{friend.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                  </div>         
+                  <ng-template #default>
+                      <img (click)="selectuser(friend._id)" src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                  </ng-template>
+                  <span>
+                      <div (click)="selectuser(friend._id)">{{friend.name | titlecase}}</div>
+                      <button class="btn" (click)="addfriend(friend._id, $event)">Add friend</button>                         
+
+                  </span>
+                  <div class="clearfix"></div>
+              </div>   
+          </div>   -->
+
+
 
           </div>
         </div>
@@ -368,8 +393,9 @@
 <ng-template #statusTemp>
   <div class="write-pop">
     <form [formGroup]="statusForm">
-      <h5><img src="/assets/images/o3.png"/>Write A Status</h5>
-<div class="write-form">
+      <h5>
+        <img src="/assets/images/o3.png" />Write A Status</h5>
+      <div class="write-form">
         <input type="text" class="" formControlName="status" placeholder="Add Status" required>
         <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
           <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
@@ -378,15 +404,15 @@
         </div>
         <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
       </div>
-      </form>
-      <div *ngIf="showstatus">
-          <p style="color:red">{{Message}}</p>
-        </div>
-        <button aria-label="Close" class="close pull-right" type="button" (click)="closeModal()">
-            <span aria-hidden="true">×</span>
-          </button>
+    </form>
+    <div *ngIf="showstatus">
+      <p style="color:red">{{Message}}</p>
+    </div>
+    <button aria-label="Close" class="close pull-right" type="button" (click)="closeModal()">
+      <span aria-hidden="true">×</span>
+    </button>
     <!-- <button type="button" class="btn btn-warning btn-wd" (click)="closeModal()">
         X
       </button> -->
-    </div>
-    </ng-template>
+  </div>
+</ng-template>

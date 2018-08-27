@@ -321,4 +321,19 @@ sendMessage(event,otherid){
   this.message = event.target.value = '';
 }
 
+addfriend(rec_id, event){
+  debugger;
+  event.target.textContent = "Friend Request Sent";    
+  //console.log('addddd', event)
+  let data = {
+    'sender_id' : this.userId,
+    'receiver_id' : rec_id,
+    'status' : 'pending',
+    'token' : this.token
+  };
+  this.userService.send_request(data).subscribe((response) => {                              
+    console.log('send reponse', response);      
+  });
+}
+
 }

@@ -89,10 +89,20 @@ hr {
   opacity: 1;
   top: 11px;
   right: 16px;
+  transition: all 0.5s;
 }
 .write-pop .close span {
   color: #fff;
   opacity: 1;
+  transition: all 0.5s;
+  text-shadow: none;
+}
+.write-pop .close:hover {
+  transform: scale(1.4);
+  color: #f0ad4e;
+}
+.write-pop .close:hover span {
+  color: #f0ad4e;
 }
 .write-pop h5 img {
   float: left;

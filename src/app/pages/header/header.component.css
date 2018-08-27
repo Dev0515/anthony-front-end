@@ -41,13 +41,13 @@ hr{
 
 .side{   
     float:left; 
-    width:30%; 
+    width:40%; 
     height:auto;  
 }
   
 .aside{    
     float:left; 
-    width:70%;
+    width:60%;
     height:auto;  
 }
 
@@ -557,11 +557,11 @@ h4 span {
 
 /* 21.8.2018 CSS start here  */
 
-.side {
+/* .side {
   float: left;
-  width: 30%;
+  width: 35%;
   height: auto;
-}
+} */
 .search {
 display: inline-block;
 margin-top: 13px;
@@ -676,4 +676,113 @@ font-size: 22px;
 }
 .statu .aside p {
   color: #efefef;
+}
+.profile_p .add-remove {
+  display: inline-block;
+  width: 100%;
+  margin-top: 11px;
+}
+/* .profile_p:hover .add-remove {
+  opacity: 1;
+  visibility: visible;
+
+} */
+.profile_p .btn-info {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+  background: url(/assets/images/add-user-black.png) #f7e041 no-repeat 0 0;
+    color: #000;
+    border:1px solid #f7e041;
+    background-position: 10px 7px;
+    padding: 6px 10px 6px 32px;
+}
+.profile_p .btn-info:hover {
+  background: url(/assets/images/add-user.png) no-repeat 0 0;
+  color: #fff;
+  background-position: 10px 7px;
+}
+.profile_p .btn-success {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+    color: #000;
+    border:1px solid #f7e041;
+    background: url(/assets/images/user.png) #f7e041 no-repeat 0 0;
+    background-position: 10px 7px;
+    padding: 6px 10px 6px 32px;
+}
+.profile_p .btn-success:hover {
+  color: #fff;
+  background: url(/assets/images/user-white.png) no-repeat 0 0;
+  background-position: 10px 7px;
+}
+.profile-text {
+  margin-bottom: 9px;
+}
+.status-form {
+  width: 86%;
+  background: #f7f7f7;
+  padding: 20px;
+  position: relative;
+}
+.status-form input[type="text"] {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px 45px 10px 10px;
+  height: 43px;
+  background: #f7f7f7;
+}
+.status-form .button {
+  font-size: 0;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background: url(/assets/images/cursor.png) no-repeat center;
+  position: absolute;
+  right: 18px;
+  top: 23px;
+  background-size: 54%;
+  background-position: 5px 10px;
+}
+.status-form .button:hover {
+  transform: rotate(47deg);
+}
+
+
+.status-form .err {
+  position: relative;
+  top: 0;
+  left: 0;
+  text-align: left;
+  margin-top: 6px;
+}
+.status-form h5 {
+  text-align: left;
+  font-weight: 600;
+  color: red;
+}
+.write-form .button:hover {
+  transform: rotate(47deg);
+}
+.status-form p {
+  text-align: left;
+}
+.cd-panel-close {
+  top: 16px;
+}
+
+.cd-panel-close:hover {
+  transform: scale(1.4);
+}
+.cd-panel-close:hover:before {
+  background-color: #FC6;
+}
+.cd-panel-close:hover:after {
+  background-color: #FC6;
 }
