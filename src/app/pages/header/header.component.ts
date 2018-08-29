@@ -213,7 +213,7 @@ closeModal() {
        
       });
   }
-  
+
   window.alert("File is uploaded.");
   this.userService.sendMessage('sth');
   // this.reset();
@@ -267,7 +267,6 @@ closeModal() {
    
   }
   suggestfriend(){
-    
     let data = {
       'user_id' : this.userId,
       'token'   : this.token
@@ -322,7 +321,6 @@ sendMessage(event,otherid){
 }
 
 addfriend(rec_id, event){
-  debugger;
   event.target.textContent = "Friend Request Sent";    
   //console.log('addddd', event)
   let data = {
@@ -336,4 +334,18 @@ addfriend(rec_id, event){
   });
 }
 
+removefriend(rec_id, event)
+{
+  debugger;
+  let data = {
+    'user_id' : this.userId,
+    'suggestion_id' : rec_id,
+    'token' : this.token
+  };
+  this.userService.remove_suggestion(data).subscribe((response) => {     
+    debugger;                         
+    console.log('send reponse', response);
+    this.suggestfriend();      
+  });
+}
 }

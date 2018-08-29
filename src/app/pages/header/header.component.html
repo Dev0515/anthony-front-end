@@ -53,7 +53,7 @@
 <!-- Right Bar -->
 <div class="cd-panel2 from-right" style=" overflow:scroll" (click)="closerightbar($event)">
   <header class="cd-panel-header">
-    <a href="javascript:void(0)" class="cd-panel-close"> </a>
+    <a href="javascript:void(0)" class="cd-panel-close elem"> </a>
   </header>
 
   <div class="cd-panel-container2">
@@ -77,7 +77,6 @@
           <a class="button skltbs-tab" href="#five">SHOP</a>
         </li>
       </ul>
-      <hr>
 
       <div class="tab-content">
         <!-- <div style="color:aliceblue" *ngFor="let message of messages">
@@ -87,15 +86,45 @@
                 <button (click)="sendMessage($event)">Send</button> -->
 
         <div class="tab-pane active" id="one" style="background-image:url(/assets/images/s2.jpg)">
-          <div class="Grid">
-            <div class="Grid-col-12 numb margin-myprofile" align="left">{{username}}</div>
-            <div class="Grid-col-12 hding" align="center">
+          <div class="Grid small-padding">
+              <div class="equal-col" align="center"><a href="#0" class="username">{{username}}</a><br><br></div>
+              <div class="equal-col" align="center"><a href="#0" class="username">CLIENT PROFIL</a><br><br></div>
+              <div class="Grid-col" align="center"><br><br><br><a href="#0" class="text-size">› MY SHOP</a><br><a href="#0" class="text-size">› BUSINESS</a></div>
+              <div class="Grid-col" align="center"><h2>PROFIT</h2>
+                <div class="profile_p">
+                    <div *ngIf="profile_pic; else default; ">
+                      <img src="{{backend_url}}profile_pics/{{profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                    </div>
+  
+                    <ng-template #default>
+                      <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                    </ng-template>
+  
+                    <!-- <div class="profile_b">
+                      <span>
+                        <i class="fa fa-edit"></i> Edit</span>
+                      <form [formGroup]="profilepicForm">
+                        <input class="" type="file" (change)="uploadProfilePic($event)" name="profile_pic" accept="image/*" formControlName="profile_pic">
+                      </form>
+                    </div> -->
+                  </div></div>
+                
+              <div class="Grid-col " style="text-align:left; "><br><br><br>
+
+                <ul class="tabs tabHeader toggle_display custom-list"><li class="active"> <a [routerLink]="['/history']">&rsaquo; Media</a><hr></li>
+                <li><a [routerLink]="['/mycomment']">› My comments</a><hr></li>
+                <li><a href="javascript:void(0)" [routerLink]="['/friends']">› Ifriends</a><hr></li>
+                <li><a  [routerLink]="['/savedpost']">› SAVED</a></li></ul> 
+                </div>
+
+<!--            
+              <div class="Grid-col-12 hding" align="center">
               <h2>PROFIL</h2>
               <br>
               <br>
-            </div>
+            </div> -->
             <div class="f_div">
-              <div class="Grid-c1 Grid-c11" align="center">
+              <!-- <div class="Grid-c1 Grid-c11" align="center">
 
                 <div class="profile_p">
                   <div *ngIf="profile_pic; else default; ">
@@ -123,15 +152,15 @@
                   <div class="custm_inp">Browse...</div>
                   <input id="file" multiple (change)="uploadfile($event)" type="file">
                 </div>
-                <!---<div *ngFor="let media of medias">
+                <div *ngFor="let media of medias">
 										<div *ngIf="media.type == image">
 											<img src="{{backend_url}}uploads/{{media}}" width="50" height="80px">
 										</div>
-									</div>-->
+									</div>
 
-              </div>
+              </div> -->
 
-              <div class="Grid-c2 Grid-c22 pro_last" style="text-align:left; ">
+              <!-- <div class="Grid-c2 Grid-c22 pro_last" style="text-align:left; ">
                 <a [routerLink]="['/history']">&rsaquo; Media</a>
                 <hr>
                 <a [routerLink]="['/mycomment']">&rsaquo; My comments</a>
@@ -143,9 +172,9 @@
                 <a href="javascript:void(0)" [routerLink]="['/edit']">&rsaquo; Edit Profile</a>
                 <hr>
                 <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a>
-              </div>
+              </div> -->
               <div align="center" class="Grid">
-                <h2 style="color:#999;">Media Posts</h2>
+                
                 <hr>
               </div>
               <div class="mediaImg">
@@ -218,7 +247,7 @@
                 </div>
                 <div class="add-remove">
                   <a (click)="addfriend(friends._id, $event)" class="btn btn-info">Add</a>
-                  <a href="#" class="btn btn-success">Remove</a>
+                  <a (click)="removefriend(friends._id,$event)" class="btn btn-success">Remove</a>
                 </div>
               </div>
             </div>

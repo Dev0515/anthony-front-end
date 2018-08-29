@@ -17,7 +17,7 @@ export class UserService {
     this.backend_url = this.global.backend_url;
   }
 
-
+  
   sendMessage(message: string) {
     this.subject.next({ text: message });
   }
@@ -293,6 +293,9 @@ export class UserService {
     let url = this.api_url.concat('PostSaveremove');
     return this.http.post(url, data).map(response => response);
   }
-
+  remove_suggestion(data): Observable<any> {
+    let url = this.api_url.concat('Removesuggestion');
+    return this.http.post(url, data).map(response => response);
+  }
 }
 
