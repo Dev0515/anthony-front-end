@@ -7,6 +7,7 @@
 body {
   margin: 0;
   font-family: Microsoft YaHei, "Source Sans Pro", Helvetica, Arial, sans-serif;
+  background-color: #454;
 }
 .ngxcarouselPointDefault {
   position: absolute;
@@ -98,7 +99,7 @@ hr {
   text-shadow: none;
 }
 .write-pop .close:hover {
-  transform: scale(1.4);
+  /* transform: scale(1.4); */
   color: #f0ad4e;
 }
 .write-pop .close:hover span {
@@ -132,3 +133,15 @@ body {
 .anim_b {
   margin: 0 !important;
 }
+.success svg path, .error svg path {
+  fill: #f1cf43 !important;
+}
+.success button, .jaspero__dialog-actions .default {
+  background: #000 !important;
+  color: #f1cf43 !important;
+  border-radius: 0 !important;
+}
+/* .success button:hover {
+  background: #f1cf43 !important;
+  color: #000 !important;
+} */

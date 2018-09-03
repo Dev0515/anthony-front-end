@@ -41,13 +41,13 @@ hr{
 
 .side{   
     float:left; 
-    width:40%; 
+    width:30%; 
     height:auto;  
 }
   
 .aside{    
     float:left; 
-    width:60%;
+    width:70%;
     height:auto;  
 }
 
@@ -135,8 +135,8 @@ html { overflow: scroll; overflow-x: hidden;}
 .cd-panel-header {
   position: fixed;
   width: 20%;
-  height: 50px;
-  line-height: 50px; 
+  height: 47px;
+  line-height: 60px; 
   z-index: 9999;  
   -webkit-transition: top 0.3s 0s;
   -moz-transition: top 0.3s 0s;
@@ -719,37 +719,55 @@ font-size: 22px;
   background-position: 10px 7px;
 }
 .profile-text {
-  margin-bottom: 9px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition:all 0.5s;
+  font-size: 16px;
+}
+.profile-text:hover {
+  color: #FC0;
 }
 .status-form {
-  width: 86%;
-  background: #f7f7f7;
-  padding: 20px;
+  width: 89%;
+  /* background: #f7f7f7; */
+  /* padding:15px  20px; */
+  /* float: left; */
+  overflow: hidden;
   position: relative;
 }
 .status-form input[type="text"] {
   width: 100%;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 10px 45px 10px 10px;
-  height: 43px;
+  /* border: 1px solid #e0e0e0; */
+  padding:20px;
   background: #f7f7f7;
+  border: none;
+}
+.status-form textarea {
+  width: 70%;
+  border-radius: 0px;
+  padding: 20px 20px 7px 20px;
+  background: #fff;
+  border: none;
+  float: left;
+  height: auto;
+  box-sizing: border-box;
 }
 .status-form .button {
   font-size: 0;
   border: none;
-  width: 40px;
-  height: 40px;
-  background: url(/assets/images/cursor.png) no-repeat center;
-  position: absolute;
-  right: 18px;
-  top: 23px;
-  background-size: 54%;
-  background-position: 5px 10px;
+  width: 30%;
+  background: #fff;
+  position: relative;
+  right: 0;
+  top: 0;
+  background-size: 100%;
+  background-position: 0 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
-.status-form .button:hover {
+/* .status-form .button img:hover {
   transform: rotate(47deg);
-}
+} */
 
 
 .status-form .err {
@@ -792,7 +810,7 @@ font-size: 22px;
 }
 .elem:hover {
   animation-name: rotate; 
-  animation-duration: 0.7s; 
+  animation-duration: 0.4s; 
   /* animation-iteration-count: infinite;
   animation-timing-function: linear; */
   color: #fff;
@@ -803,7 +821,7 @@ font-size: 22px;
 
 @keyframes rotate {
   from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
+  to {transform: rotate(180deg);}
 }
 .skltbs-tab {
   font-size: 16px;
@@ -858,4 +876,36 @@ ul.tab-nav li {
   float: left;
   width: 100%;
   padding: 12px;
+}
+.skltbs-tab {
+  display: inline-block;
+}
+.discussion-chat input {
+  width: 83%;
+  border-radius: 0px;
+  padding: 10px 20px 10px 20px;
+  background: #fff;
+  border: none;
+  float: left;
+  height: 51px;
+  box-sizing: border-box;
+}
+.discussion-chat button {
+  font-size: 0;
+  border: none;
+  width: 17%;
+  background: #fff;
+  position: relative;
+  right: 0;
+  top: 0;
+  background-size: 100%;
+  background-position: 0 0;
+  padding: 11px;
+  box-sizing: border-box;
+  height: 51px;
+}
+.discussion-chat {
+  float: right;
+  width: 65%;
+  margin-right: 10px;
 }

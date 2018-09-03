@@ -7,6 +7,8 @@ import { GlobalService } from '../../services/global.service';
 import { Subscription } from 'rxjs/Subscription';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-home',
@@ -82,7 +84,7 @@ export class HomeComponent implements OnInit {
 
        for (var media = 0; media < response.data.length; media++) {
         this.posts[media] = [];
-        this.posts[media]['name'] = response.name;
+        this.posts[media]['name'] = response.name[media];
         this.posts[media]['id'] = response.postId[media];
         this.posts[media]['likes'] = response.count[media];
         this.posts[media]['index'] = media;
@@ -102,6 +104,16 @@ export class HomeComponent implements OnInit {
         
       }
     });
+    console.log(this.posts);
+    // $( document ).ready(function() {
+    //  alert("m,s,dfd");
+    // });
+
+
+    // function test()
+    // {
+    //  alert();
+    // };
   }
 
   media(){

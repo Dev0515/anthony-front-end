@@ -114,7 +114,9 @@
                 <ul class="tabs tabHeader toggle_display custom-list"><li class="active"> <a [routerLink]="['/history']">&rsaquo; Media</a><hr></li>
                 <li><a [routerLink]="['/mycomment']">› My comments</a><hr></li>
                 <li><a href="javascript:void(0)" [routerLink]="['/friends']">› Ifriends</a><hr></li>
-                <li><a  [routerLink]="['/savedpost']">› SAVED</a></li></ul> 
+                <li><a  [routerLink]="['/savedpost']">› SAVED</a></li> 
+               <li> <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a></li>
+              </ul> 
                 </div>
 
 <!--            
@@ -207,16 +209,18 @@
                 </div>
               </div>
               <form [formGroup]="statusForm" class="status-form">
-                <input type="text" class="" formControlName="status" placeholder="Add Status" required>
+                <!-- <input type="text" class="" formControlName="status" placeholder="Add Status" required> -->
+                <textarea formControlName="status" required placeholder="write a thought.."></textarea>
+                <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()"><img src="assets/images/send.png"/></button>
                 <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
-                  <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
+                  <div style="color:#FC0" class="error_message" *ngIf="statusForm.controls.status.errors.required">
                     Please enter status.
                   </div>
                 </div>
-                <button class="button" [disabled]="statusForm.invalid" (click)="addstatus()">ADD</button>
-                <h5>Write a Thought...</h5>
+               
+                
                 <div *ngIf="showstatus">
-                  <p style="color:red">{{Message}}</p>
+                  <p style="color:#FC0">{{Message}}</p>
                 </div>
                
               </form>
@@ -245,10 +249,10 @@
                 <div *ngIf="profile_pic; else default; ">
                   <img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
                 </div>
-                <div class="add-remove">
+                <!-- <div class="add-remove">
                   <a (click)="addfriend(friends._id, $event)" class="btn btn-info">Add</a>
                   <a (click)="removefriend(friends._id,$event)" class="btn btn-success">Remove</a>
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -319,9 +323,9 @@
                 <div *ngIf="message.senderid != userId" style="color:#FC0">{{message.message}}</div>
               </div>
             </div>
-            <div *ngIf="chatboard == true">
-              <input (*ngModel)="message" #chat (keyup)="$event.keyCode == 13 && sendMessage($event,otherid)">
-              <button (click)="sendMessage($chat,otherid)">Send</button>
+            <div *ngIf="chatboard == true" class="discussion-chat">
+              <input placeholder="Write here" (*ngModel)="message" #chat (keyup)="$event.keyCode == 13 && sendMessage($event,otherid)">
+              <button (click)="sendMessage($chat,otherid)"><img src="assets/images/send.png" /></button>
             </div>
             <!-- chating part -->
 
@@ -390,7 +394,7 @@
 
 <div class="cd-panel left-sidebar-menu from-left ">
   <header class="cd-panel-header">
-    <a (click)="closerleftbar($event)" href="javascript:void(0)" class="cd-panel-close"></a>
+    <a (click)="closerleftbar($event)" href="javascript:void(0)" class="elem cd-panel-close"></a>
   </header>
   <div class="cd-panel-container">
     <br>
@@ -425,9 +429,10 @@
       <h5>
         <img src="/assets/images/o3.png" />Write A Status</h5>
       <div class="write-form">
-        <input type="text" class="" formControlName="status" placeholder="Add Status" required>
+        <input type="text" class="" formControlName="status" placeholder="write a thought" required>
+       
         <div class="err" *ngIf="statusForm.controls.status.invalid && (statusForm.controls.status.dirty || statusForm.controls.status.touched)">
-          <div class="error_message" *ngIf="statusForm.controls.status.errors.required">
+          <div style="color:#FC0" class="error_message" *ngIf="statusForm.controls.status.errors.required">
             Please enter status.
           </div>
         </div>
@@ -435,9 +440,9 @@
       </div>
     </form>
     <div *ngIf="showstatus">
-      <p style="color:red">{{Message}}</p>
+      <p style="color:#FC0">{{Message}}</p>
     </div>
-    <button aria-label="Close" class="close pull-right" type="button" (click)="closeModal()">
+    <button aria-label="Close" class="close pull-right elem" type="button" (click)="closeModal()">
       <span aria-hidden="true">×</span>
     </button>
     <!-- <button type="button" class="btn btn-warning btn-wd" (click)="closeModal()">

@@ -34,7 +34,7 @@ export class ForgotComponent implements OnInit {
   forgot(){
     this.userService.forgot_password(this.forgotForm.value).subscribe(
       data => {
-        this._alert.create('success', 'Reset password link has been sent your email');
+        this._alert.create('success', 'Reset password link has been sent your email');    
         this.userId = data.user._id;        
       }, 
       err => {
@@ -45,7 +45,7 @@ export class ForgotComponent implements OnInit {
       }
     ); 
   }
- 
+
   BacktoForgot(){
     this.firstform = true;
     this.secondform = false; 
