@@ -15,10 +15,29 @@
               <div *ngIf="mediaFile.type == 'video'">
                 <video class="banner-video" controls autoplay  src="{{backend_url}}uploads/{{mediaFile.post}}" loop width="500px" height="300px"> </video>
               </div>
+              <div class="grid yellow-border" align="left">
+                <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
+                 <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
+                <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
+                <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+                <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
+                <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
+                <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
+                 </div>
             </ngx-item>
+            
             <button NgxCarouselPrev class='leftRs'>&lt;</button>
             <button NgxCarouselNext class='rightRs'>&gt;</button>
           </ngx-carousel>
+          <!-- <div class="grid yellow-border" align="left">
+            <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
+             <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
+            <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
+            <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+            <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
+            <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
+            <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
+             </div> -->
         </div>
       </div>
 
@@ -27,36 +46,70 @@
       <div class="wrap wrap-index repeat-slider">
   
         <div>
-  <ngx-carousel [inputs]="carouselOne" (carouselLoad)="myfunc($event)" class="pos_rel">
-            <ngx-item NgxCarouselItem *ngFor="let mediaFile of post">
+            <ngx-carousel [inputs]="carouselOne" (carouselLoad)="myfunc($event)" class="pos_rel">
+            <ngx-item NgxCarouselItem *ngFor="let mediaFile of post" class="slide-item">
              
-              <div *ngIf="mediaFile.type == 'image'">
+              <div onmouseenter="myEnterFunction()" *ngIf="mediaFile.type == 'image'">
                 <img src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px">
               </div>
               <div *ngIf="mediaFile.type == 'video'">
                 <video class="banner-video" controls autoplay  src="{{backend_url}}uploads/{{mediaFile.post}}" loop width="500px" height="300px"> </video>
               </div>
+
+              <div class="grid yellow-border" align="left">
+          <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
+           <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
+          <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
+          <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+          <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
+          <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
+          <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
+           </div>
+
+
             </ngx-item>
+
+           
             <button NgxCarouselPrev class='leftRs'>&lt;</button>
             <button NgxCarouselNext class='rightRs'>&gt;</button>
           </ngx-carousel>
         </div>
+        <!-- <div class="grid yellow-border" align="left">
+          <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
+           <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
+          <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
+          <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+          <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
+          <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
+          <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
+           </div> -->
       </div>
+    
     </div>
-
     </div>
   </div>
 
   
-  <div class="grid yellow-border" align="left">
-    <div style="text-align:right; float:left"><a class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></a> </div>
-     <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
-    <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-    <a href="#"><img src="assets/images/i2.png" width="30" height="28"> </a>
-    <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
-    <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
-    <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
-     </div>
+ 
+
+
+     <ng-template #CommentSection>
+     <div class="comment-area">
+       <h5><a href="#" class="like"><img src="assets/images/thumbs-up.png"/> 20</a>Comments</h5>
+       <textarea placeholder="Write a Comment" class="form-control" name="" id="" cols="10" rows="5"></textarea>
+       <div class="comment-detail">
+         <h6>Comment 1 </h6>
+         <p>Sed ut perspiciatis unde omnis</p>
+       </div>
+       <div class="comment-detail">
+        <h6>Comment 2 </h6>
+        <p>Sed ut perspiciatis unde omnis iste natus</p>
+      </div>
+       <button aria-label="Close" (click)="closeModal()" class="close pull-right elem" type="button">
+        <span aria-hidden="true">×</span>
+      </button>
+      </div>
+    </ng-template>
 
 
   

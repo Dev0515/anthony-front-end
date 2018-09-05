@@ -201,7 +201,7 @@ button.rightRs, button.leftRs {
   padding-top:10%;
 }
 .grid {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 20px;
   z-index: 999;
@@ -241,4 +241,96 @@ button.rightRs, button.leftRs {
 .repeat-slider img {
   width: 100%;
   height: 100vh;
+}
+.comment-area h5 {
+  color: #f0ad4e;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.comment-area textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px 45px 10px 10px;
+  height: 50px;
+  background: #f7f7f7;
+}
+
+
+.elem{
+  position: absolute;
+  /* top: 40px;
+  left: 40px;
+  width: 0; 
+  height: 0; */
+  /* border-style: solid;
+  border-width: 75px;
+  border-color: red blue green orange; */
+  transition-property: transform;
+  transition-duration: 1s;
+  top: 9px;
+    right: 17px;
+    color: #fff;
+    opacity: 1;
+    text-shadow: none;
+    line-height: normal;
+}
+.elem:hover {
+  animation-name: rotate; 
+  animation-duration: 0.4s; 
+  /* animation-iteration-count: infinite;
+  animation-timing-function: linear; */
+  color:#f0ad4e;
+}
+.elem:hover:before, .elem:hover:after {
+  background-color: #fff;
+}
+
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(180deg);}
+}
+.comment-detail  {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 5px;
+  padding: 4px 10px;
+  margin-top: 11px;
+}
+.comment-detail h6 {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+ 
+}
+.comment-detail p {
+  color: #fff;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 16px
+}
+.like {
+  float: left;
+  font-size: 15px;
+  color: #f0ad4e !important;
+  font-weight: 600;
+  line-height: 25px;
+}
+.like img {
+  width: 20px;
+    float: left;
+    margin-right: 6px;
+}
+.grid a img {
+  width: auto !important;
+  height: auto !important;
+}
+.slide-item {
+  position: relative;
+}
+ngx-item.item {
+  position: relative;
 }

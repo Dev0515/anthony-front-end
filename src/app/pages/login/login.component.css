@@ -338,3 +338,33 @@ top:5px;
   margin-left: -25px;
   margin-top: 2px;
 }
+.profile_b {
+  position: relative;
+  top: 0;
+  float: left;
+  width: 100%;
+  margin-top: 15px;
+}
+.profile_b input[type="file"] {
+  margin-bottom: 0;
+  border-bottom: none;
+  opacity: 0;
+  /* visibility: hidden; */
+  position: absolute;
+}
+.profile_b img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  float: right;
+}
+.profile_b .choose-file {
+  font-weight: normal;
+  background: #FC6;
+  color: #000;
+  padding: 6px;
+  border-radius: 3px;
+  font-size: 14px;
+  margin-top: 0;
+  display: inline-block;
+}

@@ -112,9 +112,10 @@
               <div class="Grid-col " style="text-align:left; "><br><br><br>
 
                 <ul class="tabs tabHeader toggle_display custom-list"><li class="active"> <a [routerLink]="['/history']">&rsaquo; Media</a><hr></li>
-                <li><a [routerLink]="['/mycomment']">› My comments</a><hr></li>
-                <li><a href="javascript:void(0)" [routerLink]="['/friends']">› Ifriends</a><hr></li>
-                <li><a  [routerLink]="['/savedpost']">› SAVED</a></li> 
+                <!-- <li><a [routerLink]="['/mycomment']">› My comments</a><hr></li> -->
+                <li><a href="javascript:void(0)" [routerLink]="['/friends']">› Ifriends & Followers</a><hr></li>
+                <!-- <li><a  [routerLink]="['/savedpost']">› SAVED</a><hr></li>  -->
+                <li><a  href="#">› Donate</a><hr></li>
                <li> <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a></li>
               </ul> 
                 </div>
@@ -239,7 +240,7 @@
               <div class="padding profile_p" *ngFor="let friends of suggested_friends">
                 <!-- <p>{{friends._id}}</p> -->
 
-                <div class="profile-text" (click)="selectuser(friends._id)">+{{friends.name}}
+                <div class="profile-text" (click)="selectuser(friends._id)">{{friends.name}}
 
 
                   <ng-template #default>
@@ -249,10 +250,11 @@
                 <div *ngIf="profile_pic; else default; ">
                   <img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
                 </div>
-                <!-- <div class="add-remove">
+                <div class="add-remove">
+                    <!-- <a (click)="selectuser(friends._id)" class="btn btn-info">Add</a> -->
                   <a (click)="addfriend(friends._id, $event)" class="btn btn-info">Add</a>
                   <a (click)="removefriend(friends._id,$event)" class="btn btn-success">Remove</a>
-                </div> -->
+                </div>
               </div>
             </div>
 
@@ -327,6 +329,8 @@
               <input placeholder="Write here" (*ngModel)="message" #chat (keyup)="$event.keyCode == 13 && sendMessage($event,otherid)">
               <button (click)="sendMessage($chat,otherid)"><img src="assets/images/send.png" /></button>
             </div>
+            </div>
+            </div>
             <!-- chating part -->
 
             <div class="tab-pane alerte" id="four">
@@ -353,6 +357,7 @@
                 </div>
               </div>
             </div>
+
             <div class="tab-pane" id="five">
               <div align="center" class="Grid">
                 <h2>SHOP</h2>
@@ -380,8 +385,8 @@
                 <video controls src="{{backend_url}}uploads/{{media}}" width="100px" height="80px"> </video>
               </div>
             </div>
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
         <!-- cd-panel-content -->
       </div>
       <!-- cd-panel-container -->

@@ -41,13 +41,13 @@ hr{
 
 .side{   
     float:left; 
-    width:30%; 
+    width:40%; 
     height:auto;  
 }
   
 .aside{    
     float:left; 
-    width:70%;
+    width:60%;
     height:auto;  
 }
 
@@ -908,4 +908,9 @@ ul.tab-nav li {
   float: right;
   width: 65%;
   margin-right: 10px;
+}
+.mediaImg {
+  height: 295px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

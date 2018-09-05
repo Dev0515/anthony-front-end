@@ -123,6 +123,13 @@
                 <option>Select Country</option>
                 <option *ngFor="let country of countries">{{country}}</option>
               </select>
+
+              <div class="profile_b">
+                <input class="" type="file" (change)="uploadProfilePic($event)" name="profile_picture" accept="image/*" formControlName="profile_picture">
+                <strong class="choose-file">Upload Image</strong>
+                <img *ngIf="url != ''" [src]="url">
+            </div>
+
               <div class="terms-check">
                 <label><input (change)="checkAgreement($event.target.checked)" type="checkbox" value="" name="">I Agree to the <a class="terms" target="_blank" [routerLink]="['/terms']">Terms and Condition</a></label>
                 <div class="errr error-terms" *ngIf="!isCheckedTerms">

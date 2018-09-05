@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   signupForm1: FormGroup;
   signupForm2: FormGroup;
+  profilepicForm: FormGroup;
   pass_matched: Boolean = false;
   already_exists: Boolean = false;
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
@@ -26,6 +27,8 @@ export class LoginComponent implements OnInit {
   countries: any;
   isCheckedTerms: boolean = false;
   showTermsMessage : boolean = false;
+  profileImage: any; 
+  url : any = '';
 
   constructor(private userService: UserService, private _alert: AlertsService, private route: Router) {
 
@@ -52,7 +55,8 @@ export class LoginComponent implements OnInit {
       username: new FormControl('', [ Validators.required, Validators.pattern(this.unamePattern)]),
       dob: new FormControl('', [ Validators.required]),
       phone_no: new FormControl('', [ Validators.required, Validators.pattern(this.phonePattern)]),
-      country: new FormControl('', [ Validators.required])
+      country: new FormControl('', [ Validators.required]),
+      profile_picture: new FormControl('', [])
     });
 
     this.userService.get_countries().subscribe((response) => {
@@ -142,6 +146,24 @@ export class LoginComponent implements OnInit {
   {
     this.showTermsMessage = true;
   }
+  }
+
+
+
+
+
+  uploadProfilePic(e: Event){
+    debugger;       
+    const target: HTMLInputElement = e.target as HTMLInputElement;
+    let file = target.files[0];
+    Object.assign(this.RegisterData, {profile_pic : file});
+    if ( target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: ProgressEvent) => {
+        this.url = (<FileReader>event.target).result;
+      }
+      reader.readAsDataURL( target.files[0]);
+    }
   }
 
   changeForm(){

@@ -32,7 +32,17 @@ export class UserService {
 
   register(data): Observable<any> {
     let url = this.api_url.concat('register');
-    return this.http.post(url, data).map(response => response);
+    let newdata = new FormData();
+    newdata.append('profile_pic', data.profile_pic);
+    newdata.append('country',data.country);
+    newdata.append('dob',data.dob);
+    newdata.append('email',data.email);
+    newdata.append('name',data.name);
+    newdata.append('password',data.password);
+    newdata.append('phone_no',data.phone_no);
+    newdata.append('repeat_password',data.repeat_password);
+    newdata.append('username',data.username);
+    return this.http.post(url, newdata).map(response => response);
   }
 
   login(data): Observable<any> {

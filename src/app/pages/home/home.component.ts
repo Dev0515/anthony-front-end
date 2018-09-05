@@ -104,16 +104,15 @@ export class HomeComponent implements OnInit {
         
       }
     });
-    console.log(this.posts);
-    // $( document ).ready(function() {
-    //  alert("m,s,dfd");
-    // });
 
+   
+    $(document).ready(()=>{
+      this.callme();
+     }).bind(this);
+  }
 
-    // function test()
-    // {
-    //  alert();
-    // };
+  callme(){
+    console.log("called when iam ready")
   }
 
   media(){
@@ -141,11 +140,18 @@ export class HomeComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
-  
-  addStatus(template)
+
+  addComment(template)
   {
     this.openModal(template);
   };
+  
+  closeModal() {
+    debugger;
+    this.modalRef.hide();
+  }
+
+  
 
   like(post, userId, index) {
     let data = {
@@ -309,5 +315,6 @@ export class HomeComponent implements OnInit {
     // must use feature to all carousel
   }
 
+  
 }
 
