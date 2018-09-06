@@ -145,3 +145,10 @@ body {
   background: #f1cf43 !important;
   color: #000 !important;
 } */
+
+@media (max-width:991px) {
+  .repeat-slider img {
+    width: 100%;
+    height: auto !important;
+}
+}

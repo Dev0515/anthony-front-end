@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit {
   postLatestMedia= [];
   message: any;
   subscription: Subscription;
+  commentPostId: any;
+  CommentIndex: any;
 
 
   constructor(private globalService: GlobalService, private userService: UserService, private route: Router, private modalService: BsModalService) { }
@@ -80,7 +82,6 @@ export class HomeComponent implements OnInit {
     this.media();
     let data = { 'user_id': this.userId, 'token': this.token };
    this.userService.medialist(data).subscribe((response) => {
-     console.log(response.data);
 
        for (var media = 0; media < response.data.length; media++) {
         this.posts[media] = [];
@@ -89,6 +90,7 @@ export class HomeComponent implements OnInit {
         this.posts[media]['likes'] = response.count[media];
         this.posts[media]['index'] = media;
         this.posts[media]['user_id'] = response.user_id[media];
+        this.posts[media]['item_id'] = response.postItemIds[media];
         this.posts[media]['currentuser'] = this.userId;
        for (var post = 0; post < response.data[media].length; post++) {  
          this.posts[media][post] = [];
@@ -96,9 +98,11 @@ export class HomeComponent implements OnInit {
           if (ext == 'mov' || ext == 'mp4' || ext == 'mkv' || ext == 'avi' || ext == 'webm') {
             this.posts[media][post]['post'] = response.data[media][post];
             this.posts[media][post]['type'] = 'video';
+            this.posts[media][post]['itemId'] = response.postItemIds[media][post]
           } else if (ext == 'gif' || ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
             this.posts[media][post]['post'] = response.data[media][post];
             this.posts[media][post]['type'] = 'image';
+            this.posts[media][post]['itemId'] = response.postItemIds[media][post]
           }
         }
         
@@ -127,10 +131,12 @@ export class HomeComponent implements OnInit {
         if(extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png'){
          this.medias[i]['post'] = response.data[i];
          this.medias[i]['type'] ='image';
+         this.medias[i]['itemId'] = response.itemIds[i];
         }
         if(extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi'){
           this.medias[i]['post'] = response.data[i];
           this.medias[i]['type'] = 'video';
+          this.medias[i]['itemId'] = response.itemIds[i];
         }
       }
     });
@@ -141,10 +147,6 @@ export class HomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  addComment(template)
-  {
-    this.openModal(template);
-  };
   
   closeModal() {
     debugger;
@@ -174,15 +176,22 @@ export class HomeComponent implements OnInit {
       'post_id': postId,
       'comment': this.comments,
       'token': this.token
-
     }
     this.userService.commentPost(data).subscribe((response) => {
       console.log("response from comment post api", response);
-
+      this.allComment(postId, index);
+      this.comments = event.target.value = '';
     })
-    this.allComment(postId, index);
-    this.comments = event.target.value = '';
   }
+
+  addComment(template,postId, indexs)
+  {
+    debugger;
+    this.openModal(template);
+    this.commentPostId = postId
+    this.CommentIndex = indexs;
+    this.allComment(postId, indexs);
+  };
 
   public allComment(postId, indexs) {
     let data = {
@@ -196,9 +205,16 @@ export class HomeComponent implements OnInit {
       this.indexs = indexs;
       //console.log("get comment of all from all comments ==>",response.data);
       var len = response.data.length;
+      if(len > 0)
+      {
       for (var comment = 0; comment < len; comment++) {
         this.allcomments[comment] = response.data[comment];
       }
+    }
+    else
+    {
+      this.allcomments = [];
+    }
     })
   }
 

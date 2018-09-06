@@ -69,7 +69,7 @@
           <a class="button skltbs-tab" href="#three">DISCUSSION</a>
         </li>
         <li role="presentation" class="skltbs-tab-item">
-          <a class="button skltbs-tab" href="#four">ALERTE
+          <a class="button skltbs-tab" href="#four">NOTIFICATION
             <span *ngIf="friendreq_alerts" class="badge">{{total_friendreq}}</span>
           </a>
         </li>
@@ -107,7 +107,13 @@
                         <input class="" type="file" (change)="uploadProfilePic($event)" name="profile_pic" accept="image/*" formControlName="profile_pic">
                       </form>
                     </div> -->
-                  </div></div>
+                  </div>
+                <div class="btn-group">
+                  <a href="#" class="add-btn-profile">+</a>
+                  <a href="#" class="add-btn-profile">Follow</a>
+                  <a href="#" class="add-btn-profile">Sub</a>
+                </div>
+                </div>
                 
               <div class="Grid-col " style="text-align:left; "><br><br><br>
 
@@ -348,8 +354,17 @@
                   <br>
                   <div *ngIf="friendrequests.length > 0">
                     <span *ngFor="let friend of friendrequests">
-                      <a class="demandeami" (click)="senderprofile(friend.sender_id._id)"> + {{friend.sender_id.name}} </a>
+                      <a class="demandeami" (click)="senderprofile(friend.sender_id._id)"> {{friend.sender_id.name}} 
+                     
+                      </a>
+                      <div class="notification">
+                          <div class="add-remove">
+                              <a class="btn btn-info">Add</a>
+                              <a class="btn btn-success">Remove</a>
+                            </div>
+                          </div>
                     </span>
+                    
                   </div>
                   <div *ngIf="(friendrequests | json) === '{}'">
                     <div class="">No new friend request.</div>

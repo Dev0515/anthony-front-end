@@ -249,7 +249,7 @@ button.rightRs, button.leftRs {
   text-align: center;
   margin-bottom: 16px;
 }
-.comment-area textarea {
+.comment-area input[type="text"] {
   box-sizing: border-box;
   width: 100%;
   border: 1px solid #e0e0e0;
@@ -257,8 +257,38 @@ button.rightRs, button.leftRs {
   padding: 10px 45px 10px 10px;
   height: 50px;
   background: #f7f7f7;
+  color: #000;
 }
-
+.comment-area .reply-input {
+  color: #000;
+  box-sizing: border-box;
+}
+.comment-area .edit-btn {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+  background: url(/assets/images/edit.png) #f7e041 no-repeat 0 0;
+  color: #000;
+  border: 1px solid #f7e041;
+  background-position: 10px 7px;
+  padding: 4px 8px 3px 27px;
+  background-size: 21%;
+}
+.delete-btn {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+  background: url(/assets/images/delete.png) #f7e041 no-repeat 0 0;
+  color: #000;
+  border: 1px solid #f7e041;
+  background-position: 10px 6px;
+  padding: 4px 8px 3px 27px;
+  background-size: 18%;
+}
 
 .elem{
   position: absolute;
@@ -296,7 +326,7 @@ button.rightRs, button.leftRs {
 .comment-detail  {
   background-color: rgba(255,255,255,0.3);
   border-radius: 5px;
-  padding: 4px 10px;
+  padding: 10px 10px;
   margin-top: 11px;
 }
 .comment-detail h6 {
@@ -308,9 +338,11 @@ button.rightRs, button.leftRs {
 }
 .comment-detail p {
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: normal;
-  line-height: 16px
+  line-height: 19px;
+  text-transform: capitalize;
+  margin-bottom: 7px;
 }
 .like {
   float: left;
@@ -333,4 +365,9 @@ button.rightRs, button.leftRs {
 }
 ngx-item.item {
   position: relative;
+}
+.scroll-comment {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 320px;
 }

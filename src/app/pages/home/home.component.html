@@ -19,7 +19,7 @@
                 <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
                  <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
                 <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-                <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+                <a (click)="addComment(CommentSection,mediaFile.itemId,mediaFile.index)"><img src="assets/images/i2.png" width="30" height="28"> </a>
                 <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
                 <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
                 <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
@@ -29,15 +29,6 @@
             <button NgxCarouselPrev class='leftRs'>&lt;</button>
             <button NgxCarouselNext class='rightRs'>&gt;</button>
           </ngx-carousel>
-          <!-- <div class="grid yellow-border" align="left">
-            <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
-             <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
-            <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-            <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
-            <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
-            <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
-            <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
-             </div> -->
         </div>
       </div>
 
@@ -49,7 +40,7 @@
             <ngx-carousel [inputs]="carouselOne" (carouselLoad)="myfunc($event)" class="pos_rel">
             <ngx-item NgxCarouselItem *ngFor="let mediaFile of post" class="slide-item">
              
-              <div onmouseenter="myEnterFunction()" *ngIf="mediaFile.type == 'image'">
+              <div *ngIf="mediaFile.type == 'image'">
                 <img src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px">
               </div>
               <div *ngIf="mediaFile.type == 'video'">
@@ -60,7 +51,7 @@
           <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
            <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
           <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-          <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+          <a (click)="addComment(CommentSection,mediaFile.itemId,mediaFile.index)"><img src="assets/images/i2.png" width="30" height="28"> </a>
           <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
           <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
           <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
@@ -74,128 +65,56 @@
             <button NgxCarouselNext class='rightRs'>&gt;</button>
           </ngx-carousel>
         </div>
-        <!-- <div class="grid yellow-border" align="left">
-          <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
-           <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
-          <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-          <a (click)="addComment(CommentSection)"><img src="assets/images/i2.png" width="30" height="28"> </a>
-          <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
-          <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
-          <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
-           </div> -->
       </div>
     
     </div>
     </div>
   </div>
 
-  
- 
-
 
      <ng-template #CommentSection>
      <div class="comment-area">
        <h5><a href="#" class="like"><img src="assets/images/thumbs-up.png"/> 20</a>Comments</h5>
-       <textarea placeholder="Write a Comment" class="form-control" name="" id="" cols="10" rows="5"></textarea>
-       <div class="comment-detail">
+       <input type="text" (keyup)="$event.keyCode == 13 && postComment($event,commentPostId,CommentIndex)" placeholder="Write a Comment" class="form-control" name="" id="" cols="10" rows="5"/>
+       <!-- <div class="comment-detail">
          <h6>Comment 1 </h6>
          <p>Sed ut perspiciatis unde omnis</p>
        </div>
        <div class="comment-detail">
         <h6>Comment 2 </h6>
         <p>Sed ut perspiciatis unde omnis iste natus</p>
-      </div>
+      </div> -->
+      <div class="scroll-comment">
+      <div *ngFor="let comment of allcomments">
+        <div class="comment-detail" style="color:white" *ngIf="CommentIndex == indexs">
+        
+          <p>{{comment.comment}}</p>
+          <button class="edit-btn" *ngIf="userId == comment.user_id" (click)="getcomment(comment._id)">Edit</button>
+          <!-- <button class="delete-btn" *ngIf="userId == comment.user_id" (click)="deletecomment(comment._id,commentPostId,CommentIndex)">Delete</button> -->
+         
+          <div *ngIf="comment._id == commentid" >
+            <div *ngFor="let comment of commentsreply">
+              <p>{{comment}}</p>
+            </div>
+          </div>
+          <p *ngIf="commentshow == true">{{commentreply}}</p>
+          <div *ngIf="comment._id == comment_id">
+            <input (keyup)="$event.keyCode == 13 && replycomment($event,comment._id,commentPostId) ">
+          </div>
+          <!-- <button (click)="reply(comment._id)">Reply</button> -->
+          <div *ngIf="comment._id == commentid">
+            <div *ngIf="editshow == true">
+              <input class="form-control reply-input" value={{commentedit}} (keyup)="$event.keyCode == 13 && editcomment($event,comment._id,commentPostId,CommentIndex)">
+            </div>
+          </div>
+        </div>
+        </div>
+      </div> 
        <button aria-label="Close" (click)="closeModal()" class="close pull-right elem" type="button">
         <span aria-hidden="true">×</span>
       </button>
       </div>
     </ng-template>
-
-
-  
-
-
-
-
-
-
-  <!-- <div class="homepage">
-    <app-header></app-header>
-    <div style="position: fixed; top:0; left:0; z-index:100; height:100vh; width:100%;-webkit-transition: all 1.5s ease; -moz-transition: all 1.5s ease; -o-transition: all 1s ease;-ms-transition: all 1.5s ease; transition: all 1.5s ease;"
-     id="p">
-      <div class="wrap wrap-index" id="slider">
-  
-        <div *ngFor="let post of posts" class="mb-50">
-            
-  <ngx-carousel [inputs]="carouselOne" (carouselLoad)="myfunc($event)" class="pos_rel">
-            <ngx-item NgxCarouselItem *ngFor="let mediaFile of post">
-              
-              <div *ngIf="mediaFile.type == 'image'">
-                <img src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px">
-              </div>
-              <div *ngIf="mediaFile.type == 'video'">
-                <video controls src="{{backend_url}}uploads/{{mediaFile.post}}" width="500px" height="300px"> </video>
-              </div>
-            </ngx-item>
-            <button NgxCarouselPrev class='leftRs'>&lt;</button>
-            <button NgxCarouselNext class='rightRs'>&gt;</button>
-          </ngx-carousel>
-          
-          <button (click)="like(post.id,userId,post.index)" class="f_btn">
-            <span *ngIf="post.index == index">{{countlike}}</span>
-            <span *ngIf="post.index != index">{{post.likes}}</span>
-            <i class="fas fa-thumbs-up"></i> Like
-          </button>
-  
-          <button (click)="allComment(post.id,post.index)" class="f_btn">
-            <span>{{allcomments.length}}</span>
-            <i class="fas fa-comment"></i> Comment 
-          </button>
-  
-          <button (click)="savepost(post.id)" class="f_btn">
-            <i class="fas fa-share"></i> Save
-          </button>
-               
-          <button (click)="like()" class="f_btn">
-            <span>0</span>
-            <i class="fas fa-share"></i> Share
-          </button>
-  
-          <button (click)="editPost(post.id)" class="f_btn" *ngIf="post.currentuser == post.user_id">
-            <i class="fas fa-share"></i> Modify
-          </button>
-          
-      
-      
-          <div *ngFor="let comment of allcomments">
-            <div style="color:white" *ngIf="post.index == indexs">{{comment.comment}}
-              <button (click)="getcomment(comment._id)">Edit</button>
-              <button (click)="deletecomment(comment._id,post.id,post.index)">Delete</button>
-              <div *ngIf="comment._id == commentid">
-                <div *ngFor="let comment of commentsreply">
-                  <div>{{comment}}</div>
-                </div>
-              </div>
-              <p *ngIf="commentshow == true">{{commentreply}}</p>
-              <div *ngIf="comment._id == comment_id">
-                <input (keyup)="$event.keyCode == 13 && replycomment($event,comment._id,post.id) ">
-              </div>
-              <button (click)="reply(comment._id)">Reply</button>
-              <div *ngIf="comment._id == commentid">
-                <div *ngIf="editshow == true">
-                  <input value={{commentedit}} (keyup)="$event.keyCode == 13 && editcomment($event,comment._id,post.id,post.index)">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="post.index == indexs">
-            <input (keyup)="$event.keyCode == 13 && postComment($event,post.id,post.index) ">
-          </div>
-        </div>
-  
-      </div>
-    </div>
-  </div> -->
 
 
  
