@@ -18,9 +18,14 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit {
   public uploader:FileUploader ;
+  user_id: String;
   modalRef: BsModalRef;
   userId: String;
+  showcomment: Boolean = false;
+  showcomments: Boolean = false;
   username: String;
+  indexs: String;
+  allcomments = [];
   profile_pic: String = '';
   backend_url: String;  
   country: String;
@@ -34,6 +39,7 @@ export class HeaderComponent implements OnInit {
   showstatus:Boolean;
   Status :String;
   status:String;
+  comments: String;
   getallstatus:Boolean;
   userstatus:Boolean;
   Message:String;
@@ -42,6 +48,7 @@ export class HeaderComponent implements OnInit {
   posts = [];
   message:String;
   messages = [];
+  totalComments: any;
   listfriends = [];
   otherid:String;
   chatboard:Boolean= false;
@@ -49,6 +56,8 @@ export class HeaderComponent implements OnInit {
   otherId:String;
   userid:String;
   senderid :String;
+  commentPostId = String;
+  CommentIndex = String;
   @ViewChild('myInput') myInputVariable: ElementRef;
 
  
@@ -58,6 +67,7 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
+    this.user_id = localStorage.getItem('UserId');
     this.chatService
     .getMessages()
     .subscribe((message) => {
@@ -134,17 +144,85 @@ export class HeaderComponent implements OnInit {
   }
 
  // Open Modal
- openModal(template: TemplateRef<any>) {
-  this.modalRef = this.modalService.show(template);
+ openModal(template: TemplateRef<any>, config) {
+   debugger;
+   if (config != 'undeined')
+   {
+  this.modalRef = this.modalService.show(template,config);
+   }
+   else
+   {
+    this.modalRef = this.modalService.show(template);
+   }
 }
 
 addStatus(template)
 {
-  this.openModal(template);
+  // this.openModal(template);
 };
 
 closeModal() {
   this.modalRef.hide();
+}
+
+response_req(status,sender_id) {
+  let data = {
+    'sender_id': sender_id,
+    'receiver_id': this.user_id,
+    'status': status,
+    'token': this.token
+  };
+  this.userService.response_of_friend(data).subscribe((response) => {
+    console.log('Req response', response)
+    if (status === 'accepted') {
+      // this.friendrequest = response.data;
+      // this.request_accepted = true;
+    }
+    if (status === 'rejected') {
+      // this.friendrequest = {};
+    }
+  });
+}
+
+postComment(event, postId, index) {
+  this.comments = event.target.value;
+  let data = {
+    'user_id': this.userId,
+    'post_id': postId,
+    'comment': this.comments,
+    'token': this.token
+  }
+  this.userService.commentPost(data).subscribe((response) => {
+    console.log("response from comment post api", response);
+    this.allComment(postId, index);
+    this.comments = event.target.value = '';
+  })
+}
+
+public allComment(postId, indexs) {
+  let data = {
+    'user_id': this.userId,
+    'post_id': postId,
+    'token': this.token
+  };
+  this.userService.getComment(data).subscribe((response) => {
+    this.showcomment = true;
+    this.showcomments = true;
+    this.indexs = indexs;
+    //console.log("get comment of all from all comments ==>",response.data);
+    var len = response.data.length;
+    this.totalComments = len;
+    if(len > 0)
+    {
+    for (var comment = 0; comment < len; comment++) {
+      this.allcomments[comment] = response.data[comment];
+    }
+  }
+  else
+  {
+    this.allcomments = [];
+  }
+  })
 }
 
 
@@ -293,15 +371,31 @@ media(){
       if(extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png'){
         this.medias[i]['post'] = response.data[i];
         this.medias[i]['type'] ='image';
+        this.medias[i]['id'] = response.media_id[i];
        }
        if(extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi'){
          this.medias[i]['post'] = response.data[i];
          this.medias[i]['type'] = 'video';
+         this.medias[i]['id'] = response.media_id[i];
        }
     }
     console.log(this.medias);
   });
 }
+
+  addComment(template, postId, indexs) {
+    if (typeof this.modalRef != "undefined") {
+      this.closeModal();
+    }
+    const config = {
+      class: 'modal-comment',
+    }
+    this.openModal(template,config);
+    this.commentPostId = postId
+    this.CommentIndex = indexs;
+    this.allComment(postId, indexs);
+  };
+
 
 edit(){
   console.log("function working", this.userId);
@@ -336,14 +430,12 @@ addfriend(rec_id, event){
 
 removefriend(rec_id, event)
 {
-  debugger;
   let data = {
     'user_id' : this.userId,
     'suggestion_id' : rec_id,
     'token' : this.token
   };
   this.userService.remove_suggestion(data).subscribe((response) => {     
-    debugger;                         
     console.log('send reponse', response);
     this.suggestfriend();      
   });

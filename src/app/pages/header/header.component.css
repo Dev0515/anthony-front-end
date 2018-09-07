@@ -988,3 +988,138 @@ color: #f7e041;
   border-bottom: 1px solid #2E2E2E;
   margin-bottom: 7px;
 }
+.comment-area h5 {
+  color: #f0ad4e;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.comment-area input[type="text"] {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px 45px 10px 10px;
+  height: 50px;
+  background: #f7f7f7;
+  color: #000;
+}
+.comment-area .reply-input {
+  color: #000;
+  box-sizing: border-box;
+}
+.comment-area .edit-btn {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+  background: url(/assets/images/edit.png) #f7e041 no-repeat 0 0;
+  color: #000;
+  border: 1px solid #f7e041;
+  background-position: 10px 7px;
+  padding: 4px 8px 3px 27px;
+  background-size: 21%;
+}
+.delete-btn {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+  background: url(/assets/images/delete.png) #f7e041 no-repeat 0 0;
+  color: #000;
+  border: 1px solid #f7e041;
+  background-position: 10px 6px;
+  padding: 4px 8px 3px 27px;
+  background-size: 18%;
+}
+.like {
+  float: left;
+  font-size: 15px;
+  color: #f0ad4e !important;
+  font-weight: 600;
+  line-height: 25px;
+}
+.like img {
+  width: 20px;
+    float: left;
+    margin-right: 6px;
+}
+.comment-detail  {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin-top: 11px;
+}
+.comment-detail h6 {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+ 
+}
+.comment-detail p {
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 19px;
+  text-transform: capitalize;
+  margin-bottom: 7px;
+}
+.comment-link img {
+width:32px;
+}
+.comment-link span {
+  font-weight: 600;
+  color: #f0ad4e;
+  font-size: 15px;
+  vertical-align: middle;
+  margin-left: -2px;
+}
+.comment-link {
+  margin-top: 13px;
+  position: absolute;
+  bottom: 7px;
+  width: 100%;
+}
+.scroll-comment {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 320px;
+}
+
+.elem{
+  position: absolute;
+  /* top: 40px;
+  left: 40px;
+  width: 0; 
+  height: 0; */
+  /* border-style: solid;
+  border-width: 75px;
+  border-color: red blue green orange; */
+  transition-property: transform;
+  transition-duration: 1s;
+  top: 9px;
+    right: 17px;
+    color: #fff;
+    opacity: 1;
+    text-shadow: none;
+    line-height: normal;
+}
+.elem:hover {
+  animation-name: rotate; 
+  animation-duration: 0.4s; 
+  /* animation-iteration-count: infinite;
+  animation-timing-function: linear; */
+  color:#f0ad4e;
+}
+.elem:hover:before, .elem:hover:after {
+  background-color: #fff;
+}
+
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(180deg);}
+}

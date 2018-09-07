@@ -74,7 +74,7 @@
           </a>
         </li>
         <li role="presentation" class="skltbs-tab-item">
-          <a class="button skltbs-tab" href="#five">SHOP</a>
+          <a class="button skltbs-tab" href="#five">BAG</a>
         </li>
       </ul>
 
@@ -189,10 +189,10 @@
               <div class="mediaImg">
                 <div *ngFor="let media of medias" class="profile-mediaimg">
                   <div *ngIf="media.type == 'image'">
-                    <img src="{{backend_url}}uploads/{{media.post}}" width="100px" height="80px">
+                    <img (click)="addComment(CommentSection,media.id)" src="{{backend_url}}uploads/{{media.post}}" width="100px" height="80px">
                   </div>
                   <div *ngIf="media.type == 'video'">
-                    <video autoplay loop src="{{backend_url}}uploads/{{media.post}}" width="100px" height="80px"> </video>
+                    <video (click)="addComment(CommentSection,media.id)" autoplay loop src="{{backend_url}}uploads/{{media.post}}" width="100px" height="80px"> </video>
                   </div>
                 </div>
               </div>
@@ -346,10 +346,10 @@
                 <div class="equal-col vl padding" align="left">
                   <p align="center">NOTIFICATIONS</p>
                   <hr>
-                  <br>Vous n'avez aucune notification pour le moment
+                  <br>You have no notification yet
                 </div>
                 <div class="equal-col padding " align="left">
-                  <p align="center">DEMANDES D'AMI</p>
+                  <p align="center">FRIEND REQUEST</p>
                   <hr>
                   <br>
                   <div *ngIf="friendrequests.length > 0">
@@ -359,8 +359,8 @@
                       </a>
                       <div class="notification">
                           <div class="add-remove">
-                              <a class="btn btn-info">Add</a>
-                              <a class="btn btn-success">Remove</a>
+                              <button class="btn btn-info friend_reqs confirm_btn" (click)="response_req('accepted',friend.sender_id._id)">Confirm</button>
+                              <button class="btn btn-success friend_reqs reject_btn" (click)="response_req('rejected',friend.sender_id._id)">Reject</button>
                             </div>
                           </div>
                     </span>
@@ -375,7 +375,7 @@
 
             <div class="tab-pane" id="five">
               <div align="center" class="Grid">
-                <h2>SHOP</h2>
+                <h2>BAG</h2>
                 <hr>
                 <!-- <div class="equal-col vl padding" align="left">
                           <p align="center">NOTIFICATIONS</p><hr>
@@ -470,3 +470,45 @@
       </button> -->
   </div>
 </ng-template>
+
+<ng-template #CommentSection>
+  <!-- <p>sffhhfdshfhdjh</p> -->
+    <div class="comment-area">
+      <h5>Comments</h5>
+      <!-- <input type="text" (keyup)="$event.keyCode == 13 && postComment($event,commentPostId,CommentIndex)" placeholder="Write a Comment" class="form-control" name="" id="" cols="10" rows="5"/> -->
+    
+     <div class="scroll-comment">
+     <div *ngFor="let comment of allcomments">
+       <div class="comment-detail" style="color:white" *ngIf="CommentIndex == indexs">
+       
+         <p>{{comment.comment}}</p>
+         <!-- <button class="edit-btn" *ngIf="userId == comment.user_id" (click)="getcomment(comment._id)">Edit</button> -->
+        
+         <div *ngIf="comment._id == commentid" >
+           <div *ngFor="let comment of commentsreply">
+             <p>{{comment}}</p>
+           </div>
+         </div>
+         <p *ngIf="commentshow == true">{{commentreply}}</p>
+         <div *ngIf="comment._id == comment_id">
+           <input (keyup)="$event.keyCode == 13 && replycomment($event,comment._id,commentPostId) ">
+         </div>
+         <div *ngIf="comment._id == commentid">
+           <div *ngIf="editshow == true">
+             <input class="form-control reply-input" value={{commentedit}} (keyup)="$event.keyCode == 13 && editcomment($event,comment._id,commentPostId,CommentIndex)">
+           </div>
+         </div>
+       </div>
+     
+       </div>
+       <div class="comment-link">
+          <a href="#" class="share-link"><img src="/assets/images/i1.png"/> <span>10</span></a>
+          <a href="#" class="share-link"><img src="/assets/images/i2.png"/><span>{{totalComments}}</span></a>
+          <a href="#" class="share-link"><img src="/assets/images/like-comment.png"/><span>15</span></a>
+        </div>
+     </div> 
+      <button aria-label="Close" (click)="closeModal()" class="close pull-right elem" type="button">
+       <span aria-hidden="true">×</span>
+     </button>
+     </div>
+   </ng-template>
