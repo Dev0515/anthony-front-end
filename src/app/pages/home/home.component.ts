@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxCarousel } from 'ngx-carousel';
@@ -46,12 +46,13 @@ export class HomeComponent implements OnInit {
   commentsreply = [];
   commentshow: Boolean = false;
   commentsshow: Boolean = false;
-  postLatestMedia= [];
+  postLatestMedia = [];
   message: any;
   subscription: Subscription;
   commentPostId: any;
   CommentIndex: any;
-
+  AllLikes: any;
+  totalLikesofPost : any;
 
   constructor(private globalService: GlobalService, private userService: UserService, private route: Router, private modalService: BsModalService) { }
 
@@ -75,15 +76,15 @@ export class HomeComponent implements OnInit {
       touch: true,
       loop: true
     }
-   
+
     this.backend_url = this.globalService.backend_url;
     this.userId = localStorage.getItem('UserId');
     this.token = localStorage.getItem('token');
     this.media();
     let data = { 'user_id': this.userId, 'token': this.token };
-   this.userService.medialist(data).subscribe((response) => {
-
-       for (var media = 0; media < response.data.length; media++) {
+    this.getUserLikes(data);
+    this.userService.medialist(data).subscribe((response) => {
+      for (var media = 0; media < response.data.length; media++) {
         this.posts[media] = [];
         this.posts[media]['name'] = response.name[media];
         this.posts[media]['id'] = response.postId[media];
@@ -92,51 +93,87 @@ export class HomeComponent implements OnInit {
         this.posts[media]['user_id'] = response.user_id[media];
         this.posts[media]['item_id'] = response.postItemIds[media];
         this.posts[media]['currentuser'] = this.userId;
-       for (var post = 0; post < response.data[media].length; post++) {  
-         this.posts[media][post] = [];
+        for (var post = 0; post < response.data[media].length; post++) {
+          this.posts[media][post] = [];
           var ext = response.data[media][post].split(".").pop();     //To check extension of mediafiles
           if (ext == 'mov' || ext == 'mp4' || ext == 'mkv' || ext == 'avi' || ext == 'webm') {
             this.posts[media][post]['post'] = response.data[media][post];
             this.posts[media][post]['type'] = 'video';
-            this.posts[media][post]['itemId'] = response.postItemIds[media][post]
+            this.posts[media][post]['itemId'] = response.postItemIds[media][post];
+            this.posts[media][post]['name'] = response.user_id[media].name;
+            this.posts[media][post]['country'] = response.user_id[media].country;
+            this.posts[media][post]['profile_pic'] = response.user_id[media].profile_pic
           } else if (ext == 'gif' || ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
             this.posts[media][post]['post'] = response.data[media][post];
             this.posts[media][post]['type'] = 'image';
-            this.posts[media][post]['itemId'] = response.postItemIds[media][post]
+            this.posts[media][post]['itemId'] = response.postItemIds[media][post];
+            this.posts[media][post]['name'] = response.user_id[media].name;
+            this.posts[media][post]['country'] = response.user_id[media].country;
+            this.posts[media][post]['profile_pic'] = response.user_id[media].profile_pic
           }
         }
-        
+
       }
     });
 
-   
-    $(document).ready(()=>{
-      this.callme();
-     }).bind(this);
+    console.log(this.posts);
+
+    $(document).ready(function () {
+
+     });
   }
 
-  callme(){
+  callme() {
     console.log("called when iam ready")
   }
 
-  media(){
+  getUserLikes(data) {
+
+    this.userService.getUserLikes(data).subscribe((response) => {
+      this.AllLikes = response.data;
+    });
+  }
+
+  isLike(itemId, userid) {
+    if(typeof this.AllLikes !=  "undefined" )
+    {
+    var lengthLikes = this.AllLikes.filter(function (other) {
+      return other.post_id == itemId && other.user_id == userid
+    });
+    if (lengthLikes.length > 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  }
+
+
+  media() {
     this.userId = localStorage.getItem('UserId');
     this.token = localStorage.getItem('token');
-    let uid = { 'user_id': this.userId, 'token' : this.token }
+    let uid = { 'user_id': this.userId, 'token': this.token }
     this.medias = [];
     this.userService.lastUplodedUserMedia(uid).subscribe((response) => {
-      for(var i= 0; i< response.data.length; i++){
+      for (var i = 0; i < response.data.length; i++) {
         this.medias[i] = [];
         var extn = response.data[i].split(".").pop();
-        if(extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png'){
-         this.medias[i]['post'] = response.data[i];
-         this.medias[i]['type'] ='image';
-         this.medias[i]['itemId'] = response.itemIds[i];
+        if (extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png') {
+          this.medias[i]['post'] = response.data[i];
+          this.medias[i]['type'] = 'image';
+          this.medias[i]['itemId'] = response.itemIds[i];
+          this.medias[i]['name'] = response.user.name;
+          this.medias[i]['country'] = response.user.country;
+          this.medias[i]['profile_pic'] = response.user.profile_pic
         }
-        if(extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi'){
+        if (extn == 'mov' || extn == 'mp4' || extn == 'webm' || extn == 'avi') {
           this.medias[i]['post'] = response.data[i];
           this.medias[i]['type'] = 'video';
           this.medias[i]['itemId'] = response.itemIds[i];
+          this.medias[i]['name'] = response.user[0].name;
+          this.medias[i]['country'] = response.user[0].country;
+          this.medias[i]['profile_pic'] = response.user[0].profile_pic
         }
       }
     });
@@ -147,29 +184,32 @@ export class HomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  
+
   closeModal() {
-    debugger;
     this.modalRef.hide();
   }
 
-  
 
-  like(post, userId, index) {
+
+  like(post, userId, index, islike, event) {
+    let data1 = { 'user_id': this.userId, 'token': this.token };
     let data = {
       'user_id': userId,
       'post_id': post,
       'token': this.token
     };
     this.userService.likes(data).subscribe((response) => {
+      this.getUserLikes(data1);
       this.index = index;
       this.countlike = response.likes;
       console.log('user likes', response);
-
     });
   }
 
+ 
+
   postComment(event, postId, index) {
+
     this.comments = event.target.value;
     let data = {
       'user_id': this.userId,
@@ -184,14 +224,22 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  addComment(template,postId, indexs)
-  {
-    debugger;
+  addComment(template, postId, indexs) {
     this.openModal(template);
     this.commentPostId = postId
     this.CommentIndex = indexs;
     this.allComment(postId, indexs);
+    this.getTotalLikesOfPost(postId);
   };
+
+
+  getTotalLikesOfPost(postId)
+  {
+    let uid = { 'post_id': postId, 'token': this.token };
+    this.userService.GetLikesOfPost(uid).subscribe((response) => {
+      this.totalLikesofPost = response.data.length
+    })
+  }
 
   public allComment(postId, indexs) {
     let data = {
@@ -203,23 +251,19 @@ export class HomeComponent implements OnInit {
       this.showcomment = true;
       this.showcomments = true;
       this.indexs = indexs;
-      //console.log("get comment of all from all comments ==>",response.data);
       var len = response.data.length;
-      if(len > 0)
-      {
-      for (var comment = 0; comment < len; comment++) {
-        this.allcomments[comment] = response.data[comment];
+      if (len > 0) {
+        for (var comment = 0; comment < len; comment++) {
+          this.allcomments[comment] = response.data[comment];
+        }
       }
-    }
-    else
-    {
-      this.allcomments = [];
-    }
+      else {
+        this.allcomments = [];
+      }
     })
   }
 
   public getcomment(comment_id) {
-    
     let data = {
       'comment_id': comment_id,
       'token': this.token
@@ -331,6 +375,6 @@ export class HomeComponent implements OnInit {
     // must use feature to all carousel
   }
 
-  
+
 }
 

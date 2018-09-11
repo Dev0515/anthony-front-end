@@ -371,3 +371,9 @@ ngx-item.item {
   overflow-y: scroll;
   height: 320px;
 }
+.profile-pix-fit img {
+  width: 70px;
+  height: 70px !important;
+  border-radius: 100%;
+  object-fit: cover;
+}

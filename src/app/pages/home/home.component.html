@@ -16,11 +16,26 @@
                 <video class="banner-video" controls autoplay  src="{{backend_url}}uploads/{{mediaFile.post}}" loop width="500px" height="300px"> </video>
               </div>
               <div class="grid yellow-border" align="left">
-                <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
-                 <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
+                <div style="text-align:right; float:left">
+                  <div class="cd-btn2" href="#0">
+                      <img *ngIf="mediaFile.profile_pic; else default; "  src="{{backend_url}}profile_pics/{{mediaFile.profile_pic}}" style=" width:70px; height:auto">
+                      <ng-template #default>
+                          <img src="assets/images/profil.png" style=" width:70px; height:auto"   >
+                        </ng-template> 
+                  </div>
+                 </div>
+                 <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>{{mediaFile.name}}<br>{{mediaFile.country}} </span><br><br>
                 <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-                <a (click)="addComment(CommentSection,mediaFile.itemId,mediaFile.index)"><img src="assets/images/i2.png" width="30" height="28"> </a>
-                <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
+                <a title="comment" (click)="addComment(CommentSection,mediaFile.itemId,mediaFile.index)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+                
+                <a (click)="like(mediaFile.itemId,userId)">
+                    <img title="like" *ngIf="isLike(mediaFile.itemId,userId); else unlike" src="assets/images/i3.png" width="30" height="28">
+                     <ng-template #unlike>
+                    <img title="unlike"  src="assets/images/i3-like.png" width="30" height="28">
+                  </ng-template> 
+                   </a>
+
+                <!-- <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a> -->
                 <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
                 <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
                  </div>
@@ -48,17 +63,37 @@
               </div>
 
               <div class="grid yellow-border" align="left">
-          <div style="text-align:right; float:left"><div class="cd-btn2" href="#0"><img src="assets/images/profil.png" style=" width:70px; height:auto"></div> </div>
-           <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>Name<br>City </span><br><br>
-          <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
-          <a (click)="addComment(CommentSection,mediaFile.itemId,mediaFile.index)"><img src="assets/images/i2.png" width="30" height="28"> </a>
-          <a href="#"><img src="assets/images/i3.png" width="30" height="28"> </a>
+          <div style="text-align:right; float:left">
+            <div class="cd-btn2 profile-pix-fit" href="#0">
+              <img *ngIf="mediaFile.profile_pic; else default; "  src="{{backend_url}}profile_pics/{{mediaFile.profile_pic}}" style=" width:70px; height:auto">
+              <ng-template #default>
+                  <img src="assets/images/profil.png" style=" width:70px; height:auto"   >
+                </ng-template> 
+            </div> 
+          </div>
+           <div style="padding:20px; float:left; width:auto; font-size:14px; padding-bottom:0px;"><span>{{mediaFile.name}}<br>{{mediaFile.country}} </span><br><br>
+            <a href="#"><img src="assets/images/i1.png" width="30" height="28"> </a>
+          <a title="Comment" (click)="addComment(CommentSection,mediaFile.itemId,mediaFile.index)"><img src="assets/images/i2.png" width="30" height="28"> </a>
+         
+
+          <a (click)="like(mediaFile.itemId,userId,post.index,'unlike',$event)">
+            <img title="like" *ngIf="isLike(mediaFile.itemId,userId); else unlike" src="assets/images/i3.png" width="30" height="28">
+             <ng-template #unlike>
+            <img title="Unlike" src="assets/images/i3-like.png" width="30" height="28">
+          </ng-template> 
+           </a>
+
           <a href="#"><img src="assets/images/i4.png" width="30" height="28"> </a>
           <a href="#"><img src="assets/images/i6.png" width="30" height="28"> </a></div> 
            </div>
-
-
             </ngx-item>
+
+
+            <!-- <button (click)="like(post.id,userId,post.index)" class="f_btn">
+                <span *ngIf="post.index == index">{{countlike}}</span>
+                <span *ngIf="post.index != index">{{post.likes}}</span>
+                <i class="fas fa-thumbs-up"></i> Like
+              </button> -->
 
            
             <button NgxCarouselPrev class='leftRs'>&lt;</button>
@@ -74,7 +109,7 @@
 
      <ng-template #CommentSection>
      <div class="comment-area">
-       <h5><a href="#" class="like"><img src="assets/images/thumbs-up.png"/> 20</a>Comments</h5>
+       <h5><a href="#" class="like"><img src="assets/images/thumbs-up.png"/> {{totalLikesofPost}}</a>Comments</h5>
        <input type="text" (keyup)="$event.keyCode == 13 && postComment($event,commentPostId,CommentIndex)" placeholder="Write a Comment" class="form-control" name="" id="" cols="10" rows="5"/>
        <!-- <div class="comment-detail">
          <h6>Comment 1 </h6>

@@ -58,6 +58,9 @@ export class HeaderComponent implements OnInit {
   senderid :String;
   commentPostId = String;
   CommentIndex = String;
+  totalLikesofPost : any;
+  AllLikes = [];
+  defaultShowAreaOnPopup : any = 'comment'
   @ViewChild('myInput') myInputVariable: ElementRef;
 
  
@@ -128,6 +131,7 @@ export class HeaderComponent implements OnInit {
    
 
     $( document ).ready(function() {
+      
       $('ul.tab-nav li a.button').click(function() {
   
           var href = $(this).attr('href');
@@ -145,7 +149,6 @@ export class HeaderComponent implements OnInit {
 
  // Open Modal
  openModal(template: TemplateRef<any>, config) {
-   debugger;
    if (config != 'undeined')
    {
   this.modalRef = this.modalService.show(template,config);
@@ -163,6 +166,11 @@ addStatus(template)
 
 closeModal() {
   this.modalRef.hide();
+}
+
+displaySection(ref)
+{
+this.defaultShowAreaOnPopup = ref;
 }
 
 response_req(status,sender_id) {
@@ -205,6 +213,7 @@ public allComment(postId, indexs) {
     'post_id': postId,
     'token': this.token
   };
+  this.allcomments = [];
   this.userService.getComment(data).subscribe((response) => {
     this.showcomment = true;
     this.showcomments = true;
@@ -390,12 +399,23 @@ media(){
     const config = {
       class: 'modal-comment',
     }
+    this.defaultShowAreaOnPopup = 'comment';
     this.openModal(template,config);
     this.commentPostId = postId
     this.CommentIndex = indexs;
     this.allComment(postId, indexs);
+    this.getTotalLikesOfPost(postId);
   };
 
+  getTotalLikesOfPost(postId)
+  {
+    this.AllLikes = [];
+    let uid = { 'post_id': postId, 'token': this.token };
+    this.userService.GetLikesOfPost(uid).subscribe((response) => {
+      this.totalLikesofPost = response.data.length
+      this.AllLikes = response.data;
+    })
+  }
 
 edit(){
   console.log("function working", this.userId);

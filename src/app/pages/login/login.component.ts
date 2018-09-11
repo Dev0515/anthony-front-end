@@ -153,7 +153,6 @@ export class LoginComponent implements OnInit {
 
 
   uploadProfilePic(e: Event){
-    debugger;       
     const target: HTMLInputElement = e.target as HTMLInputElement;
     let file = target.files[0];
     Object.assign(this.RegisterData, {profile_pic : file});

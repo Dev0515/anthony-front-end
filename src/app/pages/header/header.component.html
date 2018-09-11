@@ -122,7 +122,7 @@
                 <li><a href="javascript:void(0)" [routerLink]="['/friends']">› Ifriends & Followers</a><hr></li>
                 <!-- <li><a  [routerLink]="['/savedpost']">› SAVED</a><hr></li>  -->
                 <li><a  href="#">› Donate</a><hr></li>
-               <li> <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a></li>
+               <!-- <li> <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a></li> -->
               </ul> 
                 </div>
 
@@ -427,6 +427,8 @@
         <a href="#0" id="disc1">♦ SHOP</a>
         <hr>
         <a href="#0" id="disc1">♦ PARAMETRES</a>
+        <hr>
+         <a href="javascript:void(0)" (click)="logout()">♦ Log out</a>
         <br>
         <br>
         <br>
@@ -474,11 +476,14 @@
 <ng-template #CommentSection>
   <!-- <p>sffhhfdshfhdjh</p> -->
     <div class="comment-area">
-      <h5>Comments</h5>
+      <h5 *ngIf="defaultShowAreaOnPopup == 'comment'">Comments</h5>
+      <h5 *ngIf="defaultShowAreaOnPopup == 'likes'">Likes By</h5>
       <!-- <input type="text" (keyup)="$event.keyCode == 13 && postComment($event,commentPostId,CommentIndex)" placeholder="Write a Comment" class="form-control" name="" id="" cols="10" rows="5"/> -->
     
      <div class="scroll-comment">
-     <div *ngFor="let comment of allcomments">
+     
+     <div *ngIf="defaultShowAreaOnPopup == 'comment'">
+      <div  *ngFor="let comment of allcomments">
        <div class="comment-detail" style="color:white" *ngIf="CommentIndex == indexs">
        
          <p>{{comment.comment}}</p>
@@ -501,10 +506,42 @@
        </div>
      
        </div>
+       </div>
+
+<div *ngIf="defaultShowAreaOnPopup == 'likes'">
+<div  *ngFor="let user of AllLikes">
+
+
+
+
+    <div class="comment-detail likes-by" style="color:white" *ngIf="CommentIndex == indexs">
+        <div class="profile_p">
+            <div *ngIf="user.user_id.profile_pic; else default; ">
+              <img src="{{backend_url}}profile_pics/{{user.user_id.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+            </div>
+
+            <ng-template #default>
+              <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+            </ng-template>
+
+            <!-- <div class="profile_b">
+              <span>
+                <i class="fa fa-edit"></i> Edit</span>
+              <form [formGroup]="profilepicForm">
+                <input class="" type="file" (change)="uploadProfilePic($event)" name="profile_pic" accept="image/*" formControlName="profile_pic">
+              </form>
+            </div> -->
+          </div>
+        <p>{{user.user_id.name}}</p>
+      </div>
+</div>
+</div>
+
+
        <div class="comment-link">
-          <a href="#" class="share-link"><img src="/assets/images/i1.png"/> <span>10</span></a>
-          <a href="#" class="share-link"><img src="/assets/images/i2.png"/><span>{{totalComments}}</span></a>
-          <a href="#" class="share-link"><img src="/assets/images/like-comment.png"/><span>15</span></a>
+          <a  class="share-link"><img src="/assets/images/i1.png"/> <span>10</span></a>
+          <a (click)="displaySection('comment')" class="share-link"><img src="/assets/images/i2.png"/><span>{{totalComments}}</span></a>
+          <a  (click)="displaySection('likes')" class="share-link"><img src="/assets/images/like-comment.png"/><span>{{totalLikesofPost}}</span></a>
         </div>
      </div> 
       <button aria-label="Close" (click)="closeModal()" class="close pull-right elem" type="button">

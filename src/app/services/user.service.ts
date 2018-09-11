@@ -214,6 +214,11 @@ export class UserService {
 
   }
 
+  getUserLikes(data): Observable<any> {
+    let url = this.api_url.concat('userlike');
+    return this.http.post(url, data).map(response => response);
+  }
+
   getMediapost(data): Observable<any> {
     let url = this.api_url.concat('getIndividualMedia');
     return this.http.post(url, data).map(response => response);
@@ -249,6 +254,12 @@ export class UserService {
     let url = this.api_url.concat('postComment');
     return this.http.post(url, data).map(response => response);
   }
+
+  GetLikesOfPost(data): Observable<any> {
+    let url = this.api_url.concat('GetLikesOfPost');
+    return this.http.post(url, data).map(response => response);
+  }
+
   getComment(data): Observable<any> {
     let url = this.api_url.concat('getAllComments');
     return this.http.post(url, data).map(response => response);
