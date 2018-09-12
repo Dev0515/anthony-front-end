@@ -2,25 +2,25 @@
   <div class="edit_profile">
   <app-header></app-header>
   <h1 align="center" >User Save Post</h1> 
-  <form [formGroup]="editForm">
+  <!-- <form [formGroup]="editForm"> -->
       <div class="row">
       <div  class="frm" *ngFor="let post of posts" class="mb-50">
 
-        <div *ngFor="let savepost of post" class="col-sm-4">
-          <div *ngIf="savepost.type == 'image'">
-          <img src="{{backend_url}}uploads/{{savepost.post}}" width="100x" height="100x">
-            <p> {{savepost.post}} </p>
+        <div class="col-sm-4">
+          <div *ngIf="post.type == 'image'">
+          <img src="{{backend_url}}uploads/{{post.media}}" width="100x" height="100x">
+            <p> {{post.media}} </p>
           </div>
-          <div *ngIf="savepost.type == 'video'">
-            <video controls src="{{backend_url}}uploads/{{savepost.post}}" width="100x" height="100x"> </video>
-            <p> {{savepost.post}} </p>
+          <div *ngIf="post.type == 'video'">
+            <video controls src="{{backend_url}}uploads/{{post.media}}" width="100x" height="100x"> </video>
+            <p> {{post.media}} </p>
           </div> 
           </div> <br> 
 
           <div class="clearfix"></div> 
       </div>
     </div>
-    </form>
+    <!-- </form> -->
            
   
   </div> <!-- edit_profile -->

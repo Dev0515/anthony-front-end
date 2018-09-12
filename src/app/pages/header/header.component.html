@@ -120,7 +120,7 @@
                 <ul class="tabs tabHeader toggle_display custom-list"><li class="active"> <a [routerLink]="['/history']">&rsaquo; Media</a><hr></li>
                 <!-- <li><a [routerLink]="['/mycomment']">› My comments</a><hr></li> -->
                 <li><a href="javascript:void(0)" [routerLink]="['/friends']">› Ifriends & Followers</a><hr></li>
-                <!-- <li><a  [routerLink]="['/savedpost']">› SAVED</a><hr></li>  -->
+                <li><a  [routerLink]="['/savedpost']">› SAVED</a><hr></li> 
                 <li><a  href="#">› Donate</a><hr></li>
                <!-- <li> <a href="javascript:void(0)" (click)="logout()">&rsaquo; Log out</a></li> -->
               </ul> 
@@ -428,7 +428,10 @@
         <hr>
         <a href="#0" id="disc1">♦ PARAMETRES</a>
         <hr>
+        <a href="javascript:void(0)" [routerLink]="['/savedpost']">&rsaquo; Saved</a>
+        <hr>
          <a href="javascript:void(0)" (click)="logout()">♦ Log out</a>
+        
         <br>
         <br>
         <br>
@@ -486,8 +489,30 @@
       <div  *ngFor="let comment of allcomments">
        <div class="comment-detail" style="color:white" *ngIf="CommentIndex == indexs">
        
-         <p>{{comment.comment}}</p>
-         <!-- <button class="edit-btn" *ngIf="userId == comment.user_id" (click)="getcomment(comment._id)">Edit</button> -->
+        <div class="profile_p">
+          <div class="profile-pic-comment" *ngIf="comment.user_id.profile_pic; else default; ">
+            <img src="{{backend_url}}profile_pics/{{comment.user_id.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+          </div>
+
+          <ng-template #default>
+              <div class="profile-pic-comment">
+            <img class="profile-pic-comment" src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+          </div>
+          </ng-template>
+
+         
+        </div>
+        <div class="text-right-comm">
+            <p class="font-weight-bold">{{comment.user_id.name}}  
+                <!-- <button class="edit-btn float-right" *ngIf="userId == comment.user_id._id" (click)="getcomment(comment._id)">Edit</button> -->
+              </p>
+        
+        
+        
+                <p class="">{{comment.comment}} </p>
+                 <!-- <button class="edit-btn" *ngIf="userId == comment.user_id" (click)="getcomment(comment._id)">Edit</button> -->
+        </div>
+      
         
          <div *ngIf="comment._id == commentid" >
            <div *ngFor="let comment of commentsreply">

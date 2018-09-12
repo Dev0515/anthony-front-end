@@ -1048,10 +1048,12 @@ color: #f7e041;
     margin-right: 6px;
 }
 .comment-detail  {
-  background-color: rgba(255,255,255,0.3);
+  /* background-color: rgba(255,255,255,0.3); */
   border-radius: 5px;
   padding: 10px 10px;
-  margin-top: 11px;
+  margin-top: 0;
+  float: left;
+  width: 100%;
 }
 .comment-detail h6 {
   color: #fff;
@@ -1126,6 +1128,7 @@ width:32px;
 .likes-by {
   width: 100%;
   float: left;
+  background-color: rgba(255,255,255,0.3);
 }
 .likes-by .profile_p {
   float: left;
@@ -1138,4 +1141,52 @@ width:32px;
 }
 .likes-by p {
   margin-top: 10px;
+}
+.profile-pic-comment {
+  float: left;
+  margin-right: 13px;
+}
+.profile-pic-comment img {
+  width: 40px;
+  height: 40px !important;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.comment-pic {
+  width: 40px;
+  height: 40px !important;
+  border-radius: 100%;
+  object-fit: cover;
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.padding-left-come {
+  padding-left: 59px;
+  margin-top: 11px;
+}
+.font-weight-bold {
+  font-weight:bold !important;
+  font-size: 16px !important;
+  margin-top: 0;
+}
+.text-right-comm {
+  float: right;
+  width: 82%;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.23);
+  border-radius: 16px;
+  margin-bottom: 0;
+  position: relative;
+}
+.text-right-comm:before {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-right: 10px solid #413f3d;
+  border-bottom: 9px solid transparent;
+  content: "";
+  position: absolute;
+  left: -9px;
 }

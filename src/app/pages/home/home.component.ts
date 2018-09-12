@@ -7,6 +7,7 @@ import { GlobalService } from '../../services/global.service';
 import { Subscription } from 'rxjs/Subscription';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AlertsService } from '@jaspero/ng2-alerts';
 declare var jquery: any;
 declare var $: any;
 
@@ -54,7 +55,7 @@ export class HomeComponent implements OnInit {
   AllLikes: any;
   totalLikesofPost : any;
 
-  constructor(private globalService: GlobalService, private userService: UserService, private route: Router, private modalService: BsModalService) { }
+  constructor(private globalService: GlobalService, private _alert: AlertsService, private userService: UserService, private route: Router, private modalService: BsModalService) { }
 
   public carouselOne: NgxCarousel;
 
@@ -151,12 +152,14 @@ export class HomeComponent implements OnInit {
 
 
   media() {
+    debugger;
     this.userId = localStorage.getItem('UserId');
     this.token = localStorage.getItem('token');
     let uid = { 'user_id': this.userId, 'token': this.token }
     this.medias = [];
     this.userService.lastUplodedUserMedia(uid).subscribe((response) => {
       for (var i = 0; i < response.data.length; i++) {
+        debugger;
         this.medias[i] = [];
         var extn = response.data[i].split(".").pop();
         if (extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png') {
@@ -171,9 +174,9 @@ export class HomeComponent implements OnInit {
           this.medias[i]['post'] = response.data[i];
           this.medias[i]['type'] = 'video';
           this.medias[i]['itemId'] = response.itemIds[i];
-          this.medias[i]['name'] = response.user[0].name;
-          this.medias[i]['country'] = response.user[0].country;
-          this.medias[i]['profile_pic'] = response.user[0].profile_pic
+          this.medias[i]['name'] = response.user.name;
+          this.medias[i]['country'] = response.user.country;
+          this.medias[i]['profile_pic'] = response.user.profile_pic
         }
       }
     });
@@ -209,8 +212,9 @@ export class HomeComponent implements OnInit {
  
 
   postComment(event, postId, index) {
-
-    this.comments = event.target.value;
+    this.comments = (event.target.value).replace(/\s/g, "");
+    if(this.comments != "")
+    {
     let data = {
       'user_id': this.userId,
       'post_id': postId,
@@ -222,6 +226,11 @@ export class HomeComponent implements OnInit {
       this.allComment(postId, index);
       this.comments = event.target.value = '';
     })
+  }
+  else
+  {
+    return false;
+  }
   }
 
   addComment(template, postId, indexs) {
@@ -248,6 +257,7 @@ export class HomeComponent implements OnInit {
       'token': this.token
     };
     this.userService.getComment(data).subscribe((response) => {
+      debugger;
       this.showcomment = true;
       this.showcomments = true;
       this.indexs = indexs;
@@ -360,7 +370,8 @@ export class HomeComponent implements OnInit {
       'token': this.token
     };
     this.userService.postsave(data).subscribe((response) => {
-      console.log("post is saved.");
+      debugger;
+       this._alert.create(response.type, response.message);
     })
   }
 
