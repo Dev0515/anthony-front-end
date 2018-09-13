@@ -152,14 +152,12 @@ export class HomeComponent implements OnInit {
 
 
   media() {
-    debugger;
     this.userId = localStorage.getItem('UserId');
     this.token = localStorage.getItem('token');
     let uid = { 'user_id': this.userId, 'token': this.token }
     this.medias = [];
     this.userService.lastUplodedUserMedia(uid).subscribe((response) => {
       for (var i = 0; i < response.data.length; i++) {
-        debugger;
         this.medias[i] = [];
         var extn = response.data[i].split(".").pop();
         if (extn == 'jpg' || extn == 'jpeg' || extn == 'gif' || extn == 'png') {
@@ -212,7 +210,7 @@ export class HomeComponent implements OnInit {
  
 
   postComment(event, postId, index) {
-    this.comments = (event.target.value).replace(/\s/g, "");
+    this.comments = (event.target.value).trim();
     if(this.comments != "")
     {
     let data = {
@@ -257,7 +255,6 @@ export class HomeComponent implements OnInit {
       'token': this.token
     };
     this.userService.getComment(data).subscribe((response) => {
-      debugger;
       this.showcomment = true;
       this.showcomments = true;
       this.indexs = indexs;
@@ -287,7 +284,9 @@ export class HomeComponent implements OnInit {
   }
 
   editcomment(event, comment_id, postId, indexs) {
-    this.comment = event.target.value;
+    this.comment = event.target.value.trim();
+    if(this.comment != "")
+    {
     let data = {
       'comment_id': comment_id,
       'comment': this.comment,
@@ -297,6 +296,11 @@ export class HomeComponent implements OnInit {
       this.editshow = false;
     });
     this.allComment(postId, indexs);
+  }
+  else
+  {
+    return false;
+  }
   }
 
   deletecomment(comment_id, postId, indexs) {
@@ -328,7 +332,9 @@ export class HomeComponent implements OnInit {
   }
 
   replycomment(event, comment_id, postId) {
-    this.replyComment = event.target.value;
+    this.replyComment = event.target.value.trim();
+    if(this.replyComment != "")
+    {
     let data = {
       'comment_id': comment_id,
       'user_id': this.userId,
@@ -338,12 +344,18 @@ export class HomeComponent implements OnInit {
     };
     this.userService.commentreply(data).subscribe((response) => {
       console.log("reply comment.", response);
+      this.reply(comment_id);
       this.replyComment = event.target.value = '';
     });
-    this.getreplycomment(comment_id);
+  }
+  else
+  {
+    return false;
+  }
   }
 
   reply(commentid) {
+   
     console.log("comment id===>", commentid);
     console.log("check comment id id ===>", commentid);
     let data = {
@@ -351,10 +363,11 @@ export class HomeComponent implements OnInit {
       'token': this.token
     }
     this.userService.getreplycomment(data).subscribe((response) => {
+      this.commentsreply = [];
       console.log("Get comment by id", response);
       var len = response.data.length;
       for (var comment = 0; comment < len; comment++) {
-        this.commentsreply[comment] = response.data[comment].replycomment;
+        this.commentsreply[comment] = response.data[comment];
         console.log("reply comment ===>", this.commentsreply[comment]);
       }
       this.comment_id = commentid;
@@ -370,7 +383,6 @@ export class HomeComponent implements OnInit {
       'token': this.token
     };
     this.userService.postsave(data).subscribe((response) => {
-      debugger;
        this._alert.create(response.type, response.message);
     })
   }

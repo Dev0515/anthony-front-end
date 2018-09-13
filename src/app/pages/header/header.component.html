@@ -70,7 +70,8 @@
         </li>
         <li role="presentation" class="skltbs-tab-item">
           <a class="button skltbs-tab" href="#four">NOTIFICATION
-            <span *ngIf="friendreq_alerts" class="badge">{{total_friendreq}}</span>
+            <span *ngIf="total_friendreq > 0" class="noti-dot"></span>
+            <!-- <span *ngIf="total_friendreq > 0" class="badge">{{total_friendreq}}</span> -->
           </a>
         </li>
         <li role="presentation" class="skltbs-tab-item">
@@ -253,7 +254,7 @@
                     <img src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
                   </ng-template>
                 </div>
-                <div *ngIf="profile_pic; else default; ">
+                <div *ngIf="friends.profile_pic; else default; ">
                   <img src="{{backend_url}}profile_pics/{{friends.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
                 </div>
                 <div class="add-remove">

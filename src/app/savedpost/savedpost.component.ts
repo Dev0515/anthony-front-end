@@ -35,7 +35,6 @@ export class SavedpostComponent implements OnInit {
   }
   fetchInitialData(data){
     this.userService.getsavePosts(data).subscribe((response)=>{
-      debugger;
       for (var media = 0; media < response.data.length; media++) {
         this.posts[media] = [];
 

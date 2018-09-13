@@ -17,7 +17,7 @@
               </div>
               <div class="grid yellow-border" align="left">
                 <div style="text-align:right; float:left">
-                  <div class="cd-btn2" href="#0">
+                  <div class="cd-btn2 profile-pix-fit" href="#0">
                       <img *ngIf="mediaFile.profile_pic; else default; "  src="{{backend_url}}profile_pics/{{mediaFile.profile_pic}}" style=" width:70px; height:auto">
                       <ng-template #default>
                           <img src="assets/images/profil.png" style=" width:70px; height:auto"   >
@@ -153,22 +153,42 @@
           
           <!-- <button class="delete-btn" *ngIf="userId == comment.user_id" (click)="deletecomment(comment._id,commentPostId,CommentIndex)">Delete</button> -->
          
-          <div *ngIf="comment._id == commentid" >
-            <div *ngFor="let comment of commentsreply">
-              <p>{{comment}}</p>
-            </div>
-          </div>
-          <p *ngIf="commentshow == true">{{commentreply}}</p>
-          <div *ngIf="comment._id == comment_id">
-            <input (keyup)="$event.keyCode == 13 && replycomment($event,comment._id,commentPostId) ">
-          </div>
-          <!-- <button (click)="reply(comment._id)">Reply</button> -->
-          <div *ngIf="comment._id == commentid">
+        
+          <!-- <p *ngIf="commentshow == true">{{commentreply}}</p> -->
+         
+          <button class="reply-btn" (click)="reply(comment._id)">Reply</button>
+          <div  *ngIf="comment._id == commentid">
             <div *ngIf="editshow == true">
               <input class="form-control reply-input" value={{commentedit}} (keyup)="$event.keyCode == 13 && editcomment($event,comment._id,commentPostId,CommentIndex)">
             </div>
           </div>
         </div>
+
+
+
+        <div class="subcomment" *ngIf="comment._id == comment_id" >
+            <div class="subcomment-repeat"  *ngFor="let comment of commentsreply">
+
+             
+                <div class="profile_p">
+                    <div class="profile-pic-comment" *ngIf="comment.user_id.profile_pic; else default; ">
+                      <img src="{{backend_url}}profile_pics/{{comment.user_id.profile_pic}}" width="100" height="100" id="profile_image" class="zoom">
+                    </div>
+                    <ng-template #default>
+                        <div class="profile-pic-comment">
+                        <img class="comment-pic" src="assets/images/profil.png" width="100" height="100" id="profile_image" class="zoom">
+                      </div>
+                      </ng-template>
+                  </div>
+                  <div class="subcomment-text">
+                  <p>{{comment.user_id.name}}</p>
+              <p>{{comment.replycomment}}</p>
+            </div>
+            </div>
+          </div>
+          <div class="comment-reply-input" *ngIf="comment._id == comment_id">
+              <input class="form-control" (keyup)="$event.keyCode == 13 && replycomment($event,comment._id,commentPostId) ">
+            </div>
         </div>
         </div>
       </div> 

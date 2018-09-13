@@ -1190,3 +1190,11 @@ width:32px;
   position: absolute;
   left: -9px;
 }
+span.noti-dot {
+  width: 9px;
+  height: 9px;
+  background: #f7e041;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 100%;
+}

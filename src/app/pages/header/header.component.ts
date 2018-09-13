@@ -114,8 +114,8 @@ export class HeaderComponent implements OnInit {
       this.friendrequests = response.data;
      // if(this.friendrequests.length > 0){
         //this.friendreq_alerts = true;
-        this.total_friendreq = 5;
-        //this.total_friendreq = this.friendrequests.length;
+        // this.total_friendreq = 5;
+        this.total_friendreq = this.friendrequests.length;
      // }
       console.log('Friend Requests =>', this.friendrequests);
     }); 
@@ -149,7 +149,7 @@ export class HeaderComponent implements OnInit {
 
  // Open Modal
  openModal(template: TemplateRef<any>, config) {
-   if (config != 'undeined')
+   if (config != 'empty')
    {
   this.modalRef = this.modalService.show(template,config);
    }
@@ -161,7 +161,7 @@ export class HeaderComponent implements OnInit {
 
 addStatus(template)
 {
-  // this.openModal(template);
+   this.openModal(template,'empty');
 };
 
 closeModal() {

@@ -428,3 +428,52 @@ ngx-item.item {
   position: absolute;
   left: -10px;
 }
+.subcomment {
+  float: left;
+  padding-left: 68px;
+  width: 100%;
+  margin-top: 11px;
+}
+.subcomment .subcomment-text {
+  float: right;
+  width: 78%;
+  padding:13px 15px;
+  background-color: rgba(255, 255, 255, 0.23);
+  border-radius: 16px;
+  margin-bottom: 0;
+  position: relative;
+}
+.subcomment .subcomment-text:before {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-right: 10px solid rgba(255, 255, 255, 0.23);
+  border-bottom: 9px solid transparent;
+  content: "";
+  position: absolute;
+  left: -10px;
+}
+.subcomment-repeat {
+  float: right;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.reply-btn {
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  margin-bottom: 7px;
+  background: url(/assets/images/reply-all.png) #f7e041 no-repeat 0 0;
+  color: #000;
+  border: 1px solid #f7e041;
+  background-position: 8px 5px;
+  padding: 4px 8px 3px 27px;
+  background-size: 21%;
+  font-weight: bold;
+}
+.comment-reply-input {
+  float: left;
+  padding-left: 131px;
+  width: 100%;
+}
