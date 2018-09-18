@@ -66,10 +66,10 @@
           <a class="button skltbs-tab" (click)="suggestfriend()" href="#two">STATUT</a>
         </li>
         <li role="presentation" class="skltbs-tab-item">
-          <a class="button skltbs-tab" href="#three">DISCUSSION</a>
+          <a class="button skltbs-tab" (click)="getFriendList()" href="#three">DISCUSSION</a>
         </li>
         <li role="presentation" class="skltbs-tab-item">
-          <a class="button skltbs-tab" href="#four">NOTIFICATION
+          <a class="button skltbs-tab" (click)="getFriendRequests()" href="#four">NOTIFICATION
             <span *ngIf="total_friendreq > 0" class="noti-dot"></span>
             <!-- <span *ngIf="total_friendreq > 0" class="badge">{{total_friendreq}}</span> -->
           </a>
@@ -232,12 +232,12 @@
                 </div>
                
               </form>
-              <div class="padding" align="left" *ngIf="userstatus">
+              <!-- <div class="padding" align="left" *ngIf="userstatus">
                 <p>
                   <a href="javascript:void(0)" style="color:#FC0">Your status :</a> {{status}}
                 </p>
                 <hr>
-              </div>
+              </div> -->
             </div>
             <div class="side vl2">
               SUGESTION

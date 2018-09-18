@@ -159,6 +159,24 @@ export class HeaderComponent implements OnInit {
    }
 }
 
+getFriendList()
+{
+  let data = { 'user_id': this.userId, 'token' : this.token };
+    this.userService.friend_list(data).subscribe((response)  => {
+      this.listfriends = response.data.friends;
+    });
+}
+
+getFriendRequests()
+{
+  let uid = { 'id': this.userId, 'token' : this.token };
+  this.userService.friendreq_alerts(uid).subscribe((response)  => {
+    this.friendrequests = response.data;
+      this.total_friendreq = this.friendrequests.length;
+    console.log('Friend Requests =>', this.friendrequests);
+  }); 
+}
+
 addStatus(template)
 {
    this.openModal(template,'empty');
@@ -173,6 +191,15 @@ displaySection(ref)
 this.defaultShowAreaOnPopup = ref;
 }
 
+getAllStatus()
+{
+  let uid = { 'id': this.userId, 'token' : this.token };
+  this.userService.get_status(uid).subscribe((response) => {
+    this.Status = response.data;
+   this.getallstatus = true;
+   });
+}
+
 response_req(status,sender_id) {
   let data = {
     'sender_id': sender_id,
@@ -183,10 +210,12 @@ response_req(status,sender_id) {
   this.userService.response_of_friend(data).subscribe((response) => {
     console.log('Req response', response)
     if (status === 'accepted') {
+      this.getFriendRequests();
       // this.friendrequest = response.data;
       // this.request_accepted = true;
     }
     if (status === 'rejected') {
+      this.getFriendRequests();
       // this.friendrequest = {};
     }
   });
@@ -260,7 +289,6 @@ public allComment(postId, indexs) {
   }
 
   logout(){
- 
     let data = { 'user_id' : this.userId, 'token' : this.token};
     this.userService.logout(data).subscribe((response)  => {
         console.log('Current Profile => ', response );  
@@ -338,15 +366,16 @@ public allComment(postId, indexs) {
         this.Message = response.message;
         this.showstatus = true;
         this.getallstatus = true;
-        
+        this.getAllStatus(); 
       }
       if(response.success == false){
         this.getallstatus = true;
         this.status= response.data.status;
         this.userstatus = true;
+        this.getAllStatus(); 
       }
       
-    
+
     })
     
     console.log('Status => ', data);
@@ -360,7 +389,7 @@ public allComment(postId, indexs) {
     }
     this.userService.suggestedfriends(data).subscribe((response)  => {
       this.suggested_friends = response.friends;
-      
+      this.getAllStatus();
       console.log('Sugg Friends => ', this.suggested_friends )      
     });
     
